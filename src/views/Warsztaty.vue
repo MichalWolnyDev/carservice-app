@@ -1,5 +1,7 @@
 <template>
   <div class="">
-    <h2>Tu będzie wyszukiwarka warsztatów</h2>
+    <div class="search">
+      <h2 class="title title__h2 text__center">Wyszukaj warsztat</h2>
+    </div>
   </div>
 </template>

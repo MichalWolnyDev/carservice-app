@@ -1,9 +1,12 @@
 <template>
   <div class="menu__box">
     <div class="menu">
-      <div class="menu__wrap">
+      <div class="menu__wrap mobile">
+        <Hamburger @wasClicked="mobileMenu = !mobileMenu" />
+      </div>
+      <div class="menu__wrap" v-if="mobileMenu">
         <router-link to="/">
-          <div class="menu__item">Home</div>
+          <div class="menu__item">Strona główna</div>
         </router-link>
         <router-link to="/warsztaty">
           <div class="menu__item">Wyszukaj warsztat</div>
@@ -11,20 +14,42 @@
         <router-link to="/status">
           <div class="menu__item">Status naprawy</div>
         </router-link>
-        
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Hamburger from "@/components/Menu/Hamburger.vue";
 export default {
   name: "Menu",
+  components: {
+    Hamburger,
+  },
+  data() {
+    return {
+      mobileMenu: true,
+      windowWidth: window.innerWidth,
+    };
+  },
+  methods: {
+    checkWindowWidth() {
+      this.windowWidth = window.innerWidth;
+
+      if (this.windowWidth <= 960) {
+        this.mobileMenu = false;
+      }
+    },
+  },
+  mounted() {
+    // window.onresize = this.checkWindowWidth();
+    window.onload = this.checkWindowWidth();
+    // window.addEventListener("resize", this.checkWindowWidth());
+  },
 };
 </script>
 
 <style lang="scss">
-
 .menu {
   background-color: $darkBlue;
   height: 100%;
@@ -38,6 +63,13 @@ export default {
     display: flex;
     flex-direction: column;
     color: #fff;
+
+    &.mobile {
+      display: none;
+      @media (max-width: 960px) {
+        display: block;
+      }
+    }
   }
   &__item {
     padding: 1rem;
