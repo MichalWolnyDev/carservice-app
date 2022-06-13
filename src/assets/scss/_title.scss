@@ -1,0 +1,13 @@
+.title {
+
+    padding-bottom: 20px;
+    border-bottom: 1px solid $darkBlue;
+
+    &__h2{
+        font-size: 2rem;
+
+        @media(max-width: 650px){
+            font-size: 1.3rem;
+        }
+    }
+}

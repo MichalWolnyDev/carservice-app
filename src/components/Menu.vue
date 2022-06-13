@@ -24,12 +24,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/_variables.scss";
 
 .menu {
   background-color: $darkBlue;
-  min-width: 300px;
-  max-width: 100%;
   height: 100%;
 
   &__box {

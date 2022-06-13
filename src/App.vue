@@ -43,7 +43,10 @@ a:visited {
   color: inherit;
   text-decoration: none;
 }
-p,h1,h2,h3 {
+p,
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
@@ -51,16 +54,26 @@ p,h1,h2,h3 {
   &__wrapper {
     display: flex;
     min-height: 100vh;
+
+    @media (max-width: 960px) {
+      display: block;
+    }
   }
   &__col {
     &.sm {
       width: 20%;
+      @media (max-width: 960px) {
+        width: 100%;
+      }
     }
     &.big {
       width: 80%;
+      @media (max-width: 960px) {
+        width: 100%;
+      }
     }
   }
-  &__container{
+  &__container {
     padding: 30px;
   }
 }
