@@ -13,22 +13,8 @@
               @input="chooseOption($event)"
             />
           </div>
-          <div class="search__item">
-            <CustomSelect
-              :options="cities"
-              :default="'Wybierz miasto'"
-              class="select"
-              @input="chooseOption($event)"
-            />
-          </div>
-          <div class="search__item">
-            <CustomSelect
-              :options="cities"
-              :default="'Wybierz miasto'"
-              class="select"
-              @input="chooseOption($event)"
-            />
-          </div>
+         
+          
         </div>
       </div>
     </div>
