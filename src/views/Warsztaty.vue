@@ -19,7 +19,7 @@
             <h3 class="services__title">Zakres usług</h3>
             <div class="services__wrap">
               <Checkbox
-              v-for="(service, index) in services"
+                v-for="(service, index) in services"
                 :label="service.label"
                 :inputVal="service.val"
                 :key="index"
@@ -60,35 +60,35 @@ export default {
       services: [
         {
           label: "Wymiana oleju i filtra oleju",
-          val: "Wymiana oleju i filtra oleju"
+          val: "Wymiana oleju i filtra oleju",
         },
         {
           label: "Wymiana akumulatora",
-          val: "Wymiana akumulatora"
+          val: "Wymiana akumulatora",
         },
         {
           label: "Wymiana opon i wulkanizacja",
-          val: "Wymiana opon i wulkanizacja"
+          val: "Wymiana opon i wulkanizacja",
         },
         {
           label: "Wymiana klocków hamulcowych",
-          val: "Wymiana klocków hamulcowych"
+          val: "Wymiana klocków hamulcowych",
         },
         {
           label: "Diagnostyka komputerowa",
-          val: "Diagnostyka komputerowa"
+          val: "Diagnostyka komputerowa",
         },
         {
           label: "Serwis klimatyzacji",
-          val: "Serwis klimatyzacji"
+          val: "Serwis klimatyzacji",
         },
         {
           label: "Sprawdzenie samochodu przed zakupem",
-          val: "Sprawdzenie samochodu przed zakupem"
+          val: "Sprawdzenie samochodu przed zakupem",
         },
         {
           label: "Poprawki lakiernicze",
-          val: "Poprawki lakiernicze"
+          val: "Poprawki lakiernicze",
         },
       ],
       selectedServices: [],
@@ -118,7 +118,7 @@ export default {
     margin: 20px;
     flex: 1;
 
-    @media (max-width: 320px) {
+    @media (max-width: 650px) {
       margin: 20px 0;
     }
   }
@@ -131,18 +131,32 @@ export default {
 }
 
 .services {
-  &__wrap{
+  &__wrap {
     margin: 0 20px;
     display: flex;
     flex-wrap: wrap;
+
+    @media (max-width: 650px) {
+      margin: 0;
+    }
   }
   &__item {
-    width: calc(100%/3);
+    width: calc(100% / 3);
+
+    @media (max-width: 768px) {
+      width: calc(100% / 2);
+    }
+    @media (max-width: 650px) {
+      width: 100%;
+    }
   }
   &__title {
     margin: 0 20px;
     padding-bottom: 15px;
 
+    @media (max-width: 650px) {
+      margin: 0;
+    }
   }
 }
 </style>
