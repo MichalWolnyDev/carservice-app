@@ -39,20 +39,34 @@
         <Button> Wyszukaj </Button>
       </div>
     </div>
+    <div>
+      <div class="listing" v-if="showListing">
+        <ListingItem v-for="(service, id) in services" :key="id"/>
+      </div>
+      <div v-if="showLoader">
+        <Loader />
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import Button from "@/components/Inputs/Button.vue";
 import Checkbox from "@/components/Inputs/Checkbox.vue";
+import ListingItem from "@/components/Listing/ListingItem.vue";
+import Loader from "@/components/Loader.vue";
 export default {
   components: {
     CustomSelect,
     Button,
     Checkbox,
+    ListingItem,
+    Loader
   },
   data() {
     return {
+      showListing: true,
+      showLoader: true,
       searchData: {
         localization: "",
       },
@@ -104,6 +118,9 @@ export default {
 </script>
 <style lang="scss">
 .search {
+  border-bottom: 1px solid #05386b;
+  padding-bottom: 20px;
+
   &__row {
     display: flex;
     flex-wrap: wrap;

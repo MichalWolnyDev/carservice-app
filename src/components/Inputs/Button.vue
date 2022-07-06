@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="button">
+    <button class="button" :class="{w100: big, green: green}">
       <slot>
         </slot>
     </button>
@@ -9,11 +9,12 @@
 <script>
 export default {
   name: "Button",
+  props: ['big', 'green']
 };
 </script>
 <style lang="scss">
 .button {
-        background-color: $darkBlue;
+    background-color: $darkBlue;
     color: #fff;
     outline: none;
     border: 0;
@@ -26,6 +27,14 @@ export default {
 
     &:hover {
         background-color: $blueActive;
+    }
+
+    &.w100{
+      min-width: 100%;
+    }
+
+    &.green{
+      background-color: $green;
     }
 }
 </style>
