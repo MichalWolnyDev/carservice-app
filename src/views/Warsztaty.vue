@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="search">
-      <h2 class="title title__h2 text__center">Wyszukaj warsztat</h2>
+      <h2 class="title title__h2 text__center">Wyszukaj warsztatAAA</h2>
 
       <div class="search__inputs">
         <div class="search__row">
