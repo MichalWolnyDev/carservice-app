@@ -8,6 +8,12 @@
         <router-link to="/">
           <div class="menu__item">Strona główna</div>
         </router-link>
+        <router-link to="/moj_profil">
+          <div class="menu__item">Mój profil</div>
+        </router-link>
+        <router-link to="/moje_pojazdy">
+          <div class="menu__item">Moje pojazdy</div>
+        </router-link>
         <router-link to="/warsztaty">
           <div class="menu__item">Wyszukaj warsztat</div>
         </router-link>

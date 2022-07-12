@@ -22,6 +22,16 @@ const routes = [
     path: '/status',
     name: 'Status',
     component: () => import(/* webpackChunkName: "status" */ '../views/Status.vue')
+  },
+  {
+    path: '/moj_profil',
+    name: 'Mój profil',
+    component: () => import(/* webpackChunkName: "status" */ '../views/Moj_profil.vue')
+  },
+  {
+    path: '/moje_pojazdy',
+    name: 'Moje pojazdy',
+    component: () => import(/* webpackChunkName: "status" */ '../views/Moje_pojazdy.vue')
   }
 ]
 
