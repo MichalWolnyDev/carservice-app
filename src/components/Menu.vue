@@ -61,7 +61,12 @@ export default {
   height: 100%;
 
   &__box {
-    height: 100%;
+    @media (min-width: 960px) {
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      left: 0;
+    }
   }
 
   &__wrap {
