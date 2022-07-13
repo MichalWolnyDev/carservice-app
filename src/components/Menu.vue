@@ -8,10 +8,10 @@
         <router-link to="/">
           <div class="menu__item">Strona główna</div>
         </router-link>
-        <router-link to="/moj_profil">
+        <router-link to="/profil">
           <div class="menu__item">Mój profil</div>
         </router-link>
-        <router-link to="/moje_pojazdy">
+        <router-link to="/pojazdy">
           <div class="menu__item">Moje pojazdy</div>
         </router-link>
         <router-link to="/warsztaty">

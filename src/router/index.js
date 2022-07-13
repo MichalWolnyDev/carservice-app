@@ -24,14 +24,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "status" */ '../views/Status.vue')
   },
   {
-    path: '/moj_profil',
+    path: '/profil',
     name: 'Mój profil',
-    component: () => import(/* webpackChunkName: "status" */ '../views/Moj_profil.vue')
+    component: () => import(/* webpackChunkName: "status" */ '../views/Profil.vue')
   },
   {
-    path: '/moje_pojazdy',
+    path: '/pojazdy',
     name: 'Moje pojazdy',
-    component: () => import(/* webpackChunkName: "status" */ '../views/Moje_pojazdy.vue')
+    component: () => import(/* webpackChunkName: "status" */ '../views/Pojazdy.vue')
   }
 ]
 
