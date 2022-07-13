@@ -25,7 +25,7 @@
         </div>
         <div class="listingItem__col">
             <div class="listingItem__cta">
-                <Button :big="true" :green="true"> Zarezerwuj wizytę </Button>
+                <Button :big="true" :green="true" @click.native="$emit('openModal', true)"> Zarezerwuj wizytę </Button>
             </div>
         </div>
       </div>

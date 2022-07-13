@@ -41,12 +41,16 @@
     </div>
     <div>
       <div class="listing" v-if="showListing">
-        <ListingItem v-for="(service, id) in services" :key="id"/>
+        <ListingItem v-for="(service, id) in services" :key="id" @openModal="showModal = true"/>
       </div>
       <div v-if="showLoader">
         <Loader />
       </div>
     </div>
+    <Modal v-if="showModal" @closeModal="showModal = false" title="Rezerwacja wizyty">
+      
+      
+    </Modal>
   </div>
 </template>
 <script>
@@ -55,18 +59,21 @@ import Button from "@/components/Inputs/Button.vue";
 import Checkbox from "@/components/Inputs/Checkbox.vue";
 import ListingItem from "@/components/Listing/ListingItem.vue";
 import Loader from "@/components/Loader.vue";
+import Modal from "@/components/Modal";
 export default {
   components: {
     CustomSelect,
     Button,
     Checkbox,
     ListingItem,
-    Loader
+    Loader,
+    Modal
   },
   data() {
     return {
       showListing: true,
       showLoader: true,
+      showModal: false,
       searchData: {
         localization: "",
       },
