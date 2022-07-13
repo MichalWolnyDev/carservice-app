@@ -48,8 +48,8 @@
       </div>
     </div>
     <Modal v-if="showModal" @closeModal="showModal = false" title="Rezerwacja wizyty">
-      
-      
+      <ReservationForm />
+
     </Modal>
   </div>
 </template>
@@ -58,6 +58,7 @@ import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import Button from "@/components/Inputs/Button.vue";
 import Checkbox from "@/components/Inputs/Checkbox.vue";
 import ListingItem from "@/components/Listing/ListingItem.vue";
+import ReservationForm from "@/components/Forms/ReservationForm.vue";
 import Loader from "@/components/Loader.vue";
 import Modal from "@/components/Modal";
 export default {
@@ -67,7 +68,8 @@ export default {
     Checkbox,
     ListingItem,
     Loader,
-    Modal
+    Modal,
+    ReservationForm
   },
   data() {
     return {

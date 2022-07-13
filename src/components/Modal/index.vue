@@ -68,6 +68,13 @@ export default {
     max-width: 100%;
     margin: 0 auto;
     padding: 2rem;
+    overflow: hidden;
+  }
+
+  &__content{
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 20px;
   }
 }
 </style>
