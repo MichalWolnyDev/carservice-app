@@ -17,13 +17,32 @@
           <p class="reservation__step-title">
             2. Wybierz odpowiadający Ci termin wizyty
           </p>
+          <div class="reservation__calendar">
+            <vc-date-picker
+              :min-date="new Date()"
+              v-model="selectedDate"
+              :model-config="modelConfig"
+            ></vc-date-picker>
+            {{ selectedDate }}
+          </div>
         </div>
       </transition>
       <transition name="fade">
         <div class="reservation__step" v-if="showSteps.step2">
           <p class="reservation__step-title">3. Dodatkowa wiadomość</p>
           <div class="reservation__textarea">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              v-model="reservationMsg"
+            ></textarea>
+          </div>
+          <div class="reservation__button">
+            <Button :green="true" @click.native="$emit('openModal', true)">
+              Zarezerwuj wizytę
+            </Button>
           </div>
         </div>
       </transition>
@@ -32,15 +51,24 @@
 </template>
 <script>
 import CustomSelect from "@/components/Inputs/CustomSelect.vue";
+import Button from "@/components/Inputs/Button.vue";
+
 export default {
   name: "ReservationForm",
   components: {
     CustomSelect,
+    Button,
   },
   data() {
     return {
       exampleCars: ["Mazda", "Opel"],
       selectedCar: "",
+      selectedDate: "",
+      reservationMsg: "",
+      modelConfig: {
+        type: "string",
+        mask: "YYYY-MM-DD", // Uses 'iso' if missing
+      },
       showSteps: {
         step1: true,
         step2: false,
@@ -57,7 +85,6 @@ export default {
     selectedCar: {
       handler() {
         if (this.selectedCar != "") {
-          console.log("dupa");
           this.showSteps.step2 = true;
         }
       },
@@ -89,6 +116,10 @@ export default {
       font-family: inherit;
       padding: 20px;
     }
+  }
+  &__button {
+    text-align: center;
+    padding: 30px 0;
   }
 }
 

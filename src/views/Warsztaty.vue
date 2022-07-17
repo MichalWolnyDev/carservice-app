@@ -48,7 +48,7 @@
       </div>
     </div>
     <Modal v-if="showModal" @closeModal="showModal = false" title="Rezerwacja wizyty">
-      <ReservationForm />
+      <ReservationForm @openModal="showModal = false"/>
 
     </Modal>
   </div>
