@@ -1,4 +1,7 @@
 module.exports = {
+    devServer: {
+        proxy: 'https://wsb.hexagos.net/'
+    },
     css: {
         loaderOptions: {
             scss: {

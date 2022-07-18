@@ -1,12 +1,21 @@
 <template>
   <div>
     <div class="listingItem shadow">
-      <p class="listingItem__title">Warsztat "u Janusza"</p>
+      <p class="listingItem__title">
+        {{ garage.name }}
+      </p>
 
       <div class="listingItem__wrap">
         <div class="listingItem__col">
-          <p class="listingItem__text">Poznań</p>
-          <p class="listingItem__text">ul. Poznańska 1, 60-611 Poznań</p>
+          <p class="listingItem__text">
+            {{ garage.city }}
+          </p>
+          <p class="listingItem__text">
+            {{ garage.province }}
+          </p>
+          <p class="listingItem__text">
+            {{ garage.address }} {{ garage.postCode }} {{ garage.city }}
+          </p>
           <p class="listingItem__text">
             Godziny otwarcia: <br />
             Pn - Pt: 8:00 - 18:00 <br />
@@ -36,9 +45,11 @@
 import Button from "@/components/Inputs/Button.vue";
 export default {
   name: "ListingItem",
+  props: ["garage"],
   components: {
     Button
-  }
+  },
+  
 };
 </script>
 <style lang="scss">

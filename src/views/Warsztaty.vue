@@ -41,7 +41,10 @@
     </div>
     <div>
       <div class="listing" v-if="showListing">
-        <ListingItem v-for="(service, id) in services" :key="id" @openModal="showModal = true"/>
+        <div class="" v-for="(garage, id) in getGarages" :key="id">
+        <ListingItem :garage="garage" @openModal="showModal = true"/>
+
+        </div>
       </div>
       <div v-if="showLoader">
         <Loader />
@@ -61,6 +64,10 @@ import ListingItem from "@/components/Listing/ListingItem.vue";
 import ReservationForm from "@/components/Forms/ReservationForm.vue";
 import Loader from "@/components/Loader.vue";
 import Modal from "@/components/Modal";
+
+import { mapGetters } from 'vuex'
+
+
 export default {
   components: {
     CustomSelect,
@@ -116,6 +123,9 @@ export default {
       ],
       selectedServices: [],
     };
+  },
+  computed: {
+    ...mapGetters(['getGarages'])
   },
   methods: {
     chooseOption(e) {
