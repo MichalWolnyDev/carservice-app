@@ -2,10 +2,10 @@
   <div>
    <div class="profile">
       <h2 class="title title__h2 text__center">Witaj! XYZ</h2>
-        <div class="profile_title">
+        <div class="profile__title">
             Informacje o użytkowniku
         </div>
-        <table class="profile_table"> 
+        <table class="profile__table"> 
           <tr>
            <th>Imię:</th>
            <td>XYZ</td>
@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <th>Twoja rola w serwisie:</th>
-            <td class="profile_admin">ADMIN</td>
+            <td class="profile__admin">ADMIN</td>
           </tr>
         </table>
        
@@ -29,23 +29,23 @@
 </template>
 <style lang="scss">
 .profile{
-  &_title{
+  &__title{
     margin: 30px 0;
     font-size: 20px;
   }
-  &_table{
+  &__table{
     text-align:left;
   }
   th{
     font-weight:bold;
   }
-  &_admin{
+  &__admin{
     color:red;
   }
-  &_user{
+  &__user{
     color:green;
   }
-  &_employee{
+  &__employee{
     color:orange;
   }
 }
