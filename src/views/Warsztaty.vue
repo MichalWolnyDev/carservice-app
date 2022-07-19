@@ -65,10 +65,11 @@ import ReservationForm from "@/components/Forms/ReservationForm.vue";
 import Loader from "@/components/Loader.vue";
 import Modal from "@/components/Modal";
 
-import { mapGetters } from 'vuex'
+import search from "@/mixins/search";
 
 
 export default {
+  mixins: [search],
   components: {
     CustomSelect,
     Button,
@@ -123,9 +124,6 @@ export default {
       ],
       selectedServices: [],
     };
-  },
-  computed: {
-    ...mapGetters(['getGarages'])
   },
   methods: {
     chooseOption(e) {

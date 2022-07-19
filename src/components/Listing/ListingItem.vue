@@ -18,24 +18,30 @@
           </p>
           <p class="listingItem__text">
             Godziny otwarcia: <br />
-            Pn - Pt: 8:00 - 18:00 <br />
-            Sobota: 10:00 - 18:00 <br />
-            Niedziela: nieczynne
+            Pn - Pt: {{ garage.hoursWeek }} <br />
+            Sobota: {{ garage.hoursSaturday }} <br />
+            Niedziela: {{ garage.horusSunday }}
           </p>
         </div>
-        <div class="listingItem__col">
+        <div class="listingItem__col" v-if="garage.services.length > 0">
           <p class="listingItem__text">Usługi które oferujemy:</p>
           <ul>
-            <li>test1</li>
-            <li>test2</li>
-            <li>test3</li>
-            <li>test4</li>
+            <li v-for="(item, id) in garage.services" :key="id">
+              {{ item.service }}
+            </li>
           </ul>
         </div>
+        <div class="listingItem__col" v-else></div>
         <div class="listingItem__col">
-            <div class="listingItem__cta">
-                <Button :big="true" :green="true" @click.native="$emit('openModal', true)"> Zarezerwuj wizytę </Button>
-            </div>
+          <div class="listingItem__cta">
+            <Button
+              :big="true"
+              :green="true"
+              @click.native="$emit('openModal', true)"
+            >
+              Zarezerwuj wizytę
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -47,9 +53,8 @@ export default {
   name: "ListingItem",
   props: ["garage"],
   components: {
-    Button
+    Button,
   },
-  
 };
 </script>
 <style lang="scss">
@@ -72,12 +77,12 @@ export default {
   &__wrap {
     display: flex;
 
-    @media(max-width: 960px){
-        display: block;
+    @media (max-width: 960px) {
+      display: block;
     }
   }
 
-  &__col{
+  &__col {
     flex: 1;
   }
 }
