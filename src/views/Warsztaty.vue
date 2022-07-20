@@ -42,7 +42,7 @@
     <div>
       <div class="listing" v-if="showListing">
         <div class="" v-for="(garage, id) in getGarages" :key="id">
-        <ListingItem :garage="garage" @openModal="showModal = true"/>
+          <ListingItem :garage="garage" @openModal="showModal = true"/>
 
         </div>
       </div>

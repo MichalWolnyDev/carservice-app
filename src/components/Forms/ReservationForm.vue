@@ -1,6 +1,25 @@
 <template>
   <div class="reservation">
     <div class="reservation__wrap">
+      <div class="reservation__garage">
+        <p>
+          <strong> Wybrany serwis: </strong>
+        </p>
+        <p>
+          {{ getChosenGarage.name }}
+        </p>
+        <p>
+          {{ getChosenGarage.address }}, {{ getChosenGarage.postCode }}
+          {{ getChosenGarage.city }}
+        </p>
+        <br>
+        <p>
+          <strong> Godziny otwarcia: </strong>
+        </p>
+        <p>Pn - Pt: {{ getChosenGarage.hoursWeek }}</p>
+        <p>Sobota: {{ getChosenGarage.hoursSaturday }}</p>
+        <p>Niedziela: {{ getChosenGarage.horusSunday }}</p>
+      </div>
       <div class="reservation__step">
         <p class="reservation__step-title">1. Wybierz swój pojazd</p>
         <div class="reservation__car">
@@ -41,7 +60,7 @@
           </div>
           <div class="reservation__button">
             <Button :green="true" @click.native="$emit('openModal', true)">
-              Zarezerwuj wizytę
+              Wyślij
             </Button>
           </div>
         </div>
@@ -53,8 +72,11 @@
 import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import Button from "@/components/Inputs/Button.vue";
 
+import search from "@/mixins/search";
+
 export default {
   name: "ReservationForm",
+  mixins: [search],
   components: {
     CustomSelect,
     Button,
@@ -95,6 +117,9 @@ export default {
 </script>
 <style lang="scss">
 .reservation {
+  &__garage{
+    padding-bottom: 2rem;
+  }
   &__wrap {
     padding-bottom: 2rem;
   }

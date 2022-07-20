@@ -5,7 +5,7 @@
         <p class="modal__title">
           {{ title }}
         </p>
-        <div class="modal__close" @click="$emit('closeModal')">
+        <div class="modal__close" @click="$emit('closeModal'), clearGarage()">
           <span> X </span>
         </div>
       </div>
@@ -16,11 +16,17 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "Modal",
   props: {
     title: String,
   },
+  methods: {
+    ...mapActions({
+      clearGarage: 'clearGarage'
+    })
+  }
 };
 </script>
 <style lang="scss">

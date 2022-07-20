@@ -8,16 +8,23 @@ const BASE_URL = process.env.VUE_APP_BASEURL
 
 const store = new Vuex.Store({
   state: {
-    garages: []
+    garages: [],
+    chosenGarage: []
   },
   getters: {
     getGarages(state) {
       return state.garages;
     },
+    getChosenGarage(state) {
+      return state.chosenGarage;
+    },
   },
   mutations: {
     setGarageList(state, data) {
       state.garages = data;
+    },
+    setChosenGarage(state, data) {
+      state.chosenGarage = data;
     },
 
   },
@@ -33,6 +40,12 @@ const store = new Vuex.Store({
           console.log(err);
         });
     },
+    chooseGarage({commit}, data) {
+      commit("setChosenGarage", data)
+    },
+    clearGarage({commit}) {
+      commit("setChosenGarage", [])
+    }
   },
   modules: {
   }

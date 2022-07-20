@@ -7,12 +7,14 @@ export default {
     },
     computed: {
         ...mapGetters({
-            getGarages: 'getGarages'
+            getGarages: 'getGarages',
+            getChosenGarage: 'getChosenGarage'
         })
     },
     methods: {
         ...mapActions({
             fetchGarages: 'fetchGarages',
+         
         })
     },
 }

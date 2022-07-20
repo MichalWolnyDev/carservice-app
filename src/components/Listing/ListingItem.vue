@@ -37,7 +37,7 @@
             <Button
               :big="true"
               :green="true"
-              @click.native="$emit('openModal', true)"
+              @click.native="$emit('openModal', true), chooseGarage(garage)"
             >
               Zarezerwuj wizytę
             </Button>
@@ -49,11 +49,18 @@
 </template>
 <script>
 import Button from "@/components/Inputs/Button.vue";
+import { mapActions } from "vuex";
+
 export default {
   name: "ListingItem",
   props: ["garage"],
   components: {
     Button,
+  },
+  methods: {
+    ...mapActions({
+         chooseGarage: 'chooseGarage'
+    }),
   },
 };
 </script>
