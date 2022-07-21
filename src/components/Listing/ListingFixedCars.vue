@@ -23,7 +23,7 @@
             Sobota: 10:00 - 18:00 <br />
             Niedziela: nieczynne
           </p>
-          <div class="listingItemFixedCars__text">
+          <div @click="show = !show" class="listingItemFixedCars__button">
           SPRAWDŹ STATUS NAPRAWY   <img :src='arrow_down' width="25" height="25"/>
           </div>
         
@@ -141,6 +141,10 @@ export default {
 
   &__col{
     flex: 1;
+  }
+  &__button{
+    cursor: pointer;
+    font-style:italic;
   }
 }
 .status{
