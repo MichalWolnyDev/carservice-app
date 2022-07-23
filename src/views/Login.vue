@@ -56,23 +56,22 @@ export default {
         {
             name: 'slide1',
             img: require("@/assets/svg/outlander-sylwetka.svg"),
-            title: 'Potężne warsztaty',
-            description: 'testowy tekst bla bla bla'
+            title: 'Zadbaj o swój samochód',
+            description: 'Sprawdź dostępne usługi'
+        },
+       {
+           name: 'slide2',
+            img: require("@/assets/svg/mechanic-worker-svgrepo-com.svg"),
+            title: 'Zarezerwuj profesjonalny serwis',
+            description: 'W oparciu o opinie użytkowników'
         },
         {
-            name: 'slide1',
-            img: require("@/assets/svg/outlander-sylwetka.svg"),
-            title: 'Potężne warsztaty',
-            description: 'testowy tekst bla bla bla'
-        },
-        // {
-        //     name: 'slide2',
-        //     img: require("@/assets/svg/jonata-Mechanic-1.svg")
-        // },
-        // {
-        //     name: 'slide3',
-        //     img: require("@/assets/svg/Anonymous_Map_of_Poland.svg")
-        // }
+             name: 'slide3',
+            img: require("@/assets/svg/polskagurom.svg"),
+            title: 'Działamy na terenie całej Polski',
+            description: 'Już teraz znajdź warsztat w swojej okolicy'
+         }
+        
       ],
     };
   },
