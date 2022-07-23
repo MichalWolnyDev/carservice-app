@@ -1,30 +1,7 @@
 <template>
-  <div id="app">
-    <div class="app">
-      <div class="app__wrapper">
-        <div class="app__col sm">
-          <Menu />
-        </div>
-        <div class="app__col big">
-          <div class="app__container">
-            <router-view />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+             <router-view />
+
 </template>
-
-<script>
-import Menu from "@/components/Menu.vue";
-
-export default {
-  components: {
-    Menu,
-  },
-};
-</script>
-
 <style lang="scss">
 *,
 ::after,
@@ -48,33 +25,5 @@ h1,
 h2,
 h3 {
   margin: 0;
-}
-
-.app {
-  &__wrapper {
-    display: flex;
-    min-height: 100vh;
-
-    @media (max-width: 960px) {
-      display: block;
-    }
-  }
-  &__col {
-    &.sm {
-      width: 20%;
-      @media (max-width: 960px) {
-        width: 100%;
-      }
-    }
-    &.big {
-      width: 80%;
-      @media (max-width: 960px) {
-        width: 100%;
-      }
-    }
-  }
-  &__container {
-    padding: 30px;
-  }
 }
 </style>

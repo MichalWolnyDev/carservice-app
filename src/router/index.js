@@ -6,33 +6,46 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
-    path: '/warsztaty',
-    name: 'Warsztaty',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "warsztaty" */ '../views/Warsztaty.vue')
-  },
-  {
-    path: '/status',
-    name: 'Status',
-    component: () => import(/* webpackChunkName: "status" */ '../views/Status.vue')
-  },
-  {
-    path: '/profil',
-    name: 'Mój profil',
-    component: () => import(/* webpackChunkName: "status" */ '../views/Profil.vue')
-  },
-  {
-    path: '/pojazdy',
-    name: 'Moje pojazdy',
-    component: () => import(/* webpackChunkName: "status" */ '../views/Pojazdy.vue')
+    path: '',
+    component: () => import(/* webpackChunkName: "" */ '../LoggedInApp.vue'),
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: Home
+      },
+      {
+        path: '/warsztaty',
+        name: 'Warsztaty',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "warsztaty" */ '../views/Warsztaty.vue')
+      },
+      {
+        path: '/status',
+        name: 'Status',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Status.vue')
+      },
+      {
+        path: '/profil',
+        name: 'Mój profil',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Profil.vue')
+      },
+      {
+        path: '/pojazdy',
+        name: 'Moje pojazdy',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Pojazdy.vue')
+      }
+    ]
   }
+  
+ 
 ]
 
 const router = new VueRouter({

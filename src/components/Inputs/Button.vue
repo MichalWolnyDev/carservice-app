@@ -1,15 +1,16 @@
 <template>
   <div>
-    <button class="button" :class="{w100: big, green: green}">
+    <button class="button" :class="{w100: big, green: green, arrow: arrow}">
       <slot>
         </slot>
+        <slot name="arrow"></slot>
     </button>
   </div>
 </template>
 <script>
 export default {
   name: "Button",
-  props: ['big', 'green']
+  props: ['big', 'green', 'arrow']
 };
 </script>
 <style lang="scss">
@@ -35,6 +36,15 @@ export default {
 
     &.green{
       background-color: $green;
+    }
+
+    &.arrow { 
+      display: flex;
+      align-items: center;
+
+      img {
+        max-width: 30px;
+      }
     }
 }
 </style>

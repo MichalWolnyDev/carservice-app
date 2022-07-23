@@ -5,6 +5,9 @@
         <Hamburger @wasClicked="mobileMenu = !mobileMenu" />
       </div>
       <div class="menu__wrap" v-if="mobileMenu">
+        <router-link to="/login">
+          <div class="menu__item">Login page (roboczo)</div>
+        </router-link>
         <router-link to="/">
           <div class="menu__item">Strona główna</div>
         </router-link>

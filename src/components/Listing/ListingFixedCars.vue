@@ -2,18 +2,12 @@
   <div>
     <h2 class="title title__h2 text__center">Status naprawy</h2>
     <div class="listingItemFixedCars shadow">
-      <p class="listingItemFixedCars__title">
-        Volkswagen Passat
-      </p>
-        
+      <p class="listingItemFixedCars__title">Volkswagen Passat</p>
+
       <div class="listingItemFixedCars__wrap">
         <div class="listingItemFixedCars__col">
-          <p class="listingItemFixedCars__text">
-            AutoMech Mechanik
-          </p>
-          <p class="listingItemFixedCars__text">
-            wielkopolskie
-          </p>
+          <p class="listingItemFixedCars__text">AutoMech Mechanik</p>
+          <p class="listingItemFixedCars__text">wielkopolskie</p>
           <p class="listingItemFixedCars__text">
             ul. Kolorowa 20/2 60-001 Poznań
           </p>
@@ -23,96 +17,102 @@
             Sobota: 10:00 - 18:00 <br />
             Niedziela: nieczynne
           </p>
-          <div @click="show = !show" class="listingItemFixedCars__button">
-          SPRAWDŹ STATUS NAPRAWY   <img :src='arrow_down' width="25" height="25"/>
-          </div>
-        
-        
+          <br>
+          <Button :arrow="true" :green="true" @click.native="show = !show">
+            <span>
+              SPRAWDŹ STATUS NAPRAWY
+            </span>
+            <img :src="arrow_down" alt="SPRAWDŹ STATUS NAPRAWY" />
+          </Button>
+
           <div class="status">
-      
-      <div class="status__container" v-if="show">
-        <!-- <div class="status__message">
+            <div class="status__container" v-if="show">
+              <!-- <div class="status__message">
              <p class="status__message-text text__center"> 
                 Brak informacji o zarezerwowanej wizycie
             </p>
         </div> -->
-        <div class="steps">
-          <div class="steps__item active">
-            <div class="steps__item-row">
-              <div class="steps__number active">
-                <p class="steps__number-text">1</p>
-              </div>
-              <div class="steps__message">
-                <p class="steps__message-text active">
-                  Rezerwacja oczekuje na przyjęcie przez warsztat
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="steps__item">
-            <div class="steps__item-row">
-              <div class="steps__number">
-                <p class="steps__number-text">2</p>
-              </div>
-              <div class="steps__message">
-                <p class="steps__message-text">
-                  Samochód przyjęty do warsztatu
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="steps__item">
-            <div class="steps__item-row">
-              <div class="steps__number">
-                <p class="steps__number-text">3</p>
-              </div>
-              <div class="steps__message">
-                <p class="steps__message-text">
-                  Trwa naprawa Twojego samochodu
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="steps__item">
-            <div class="steps__item-row">
-              <div class="steps__number">
-                <p class="steps__number-text">4</p>
-              </div>
-              <div class="steps__message">
-                <p class="steps__message-text">Auto czeka na odbiór</p>
-              </div>
-            </div>
-          </div>
-          <div class="steps__item">
-            <div class="steps__item-row">
-              <div class="steps__number">
-                <p class="steps__number-text">5</p>
-              </div>
-              <div class="steps__message">
-                <p class="steps__message-text">Auto odebrane przez klienta</p>
+              <div class="steps">
+                <div class="steps__item active">
+                  <div class="steps__item-row">
+                    <div class="steps__number active">
+                      <p class="steps__number-text">1</p>
+                    </div>
+                    <div class="steps__message">
+                      <p class="steps__message-text active">
+                        Rezerwacja oczekuje na przyjęcie przez warsztat
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="steps__item">
+                  <div class="steps__item-row">
+                    <div class="steps__number">
+                      <p class="steps__number-text">2</p>
+                    </div>
+                    <div class="steps__message">
+                      <p class="steps__message-text">
+                        Samochód przyjęty do warsztatu
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="steps__item">
+                  <div class="steps__item-row">
+                    <div class="steps__number">
+                      <p class="steps__number-text">3</p>
+                    </div>
+                    <div class="steps__message">
+                      <p class="steps__message-text">
+                        Trwa naprawa Twojego samochodu
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="steps__item">
+                  <div class="steps__item-row">
+                    <div class="steps__number">
+                      <p class="steps__number-text">4</p>
+                    </div>
+                    <div class="steps__message">
+                      <p class="steps__message-text">Auto czeka na odbiór</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="steps__item">
+                  <div class="steps__item-row">
+                    <div class="steps__number">
+                      <p class="steps__number-text">5</p>
+                    </div>
+                    <div class="steps__message">
+                      <p class="steps__message-text">
+                        Auto odebrane przez klienta
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-      </div>
-    </div>
-  </div>
   </div>
 </template>
 <script>
-import arrow_down from '/src/assets/arrow_down.svg';
+import arrow_down from "/src/assets/arrow_down.svg";
+import Button from "@/components/Inputs/Button.vue";
 export default {
-  data(){
+  components: {
+    Button,
+  },
+  data() {
     return {
       arrow_down,
-      show:false,
-    }
-  }
-}
- 
-
+      show: false,
+    };
+  },
+};
 </script>
 <style lang="scss">
 .listingItemFixedCars {
@@ -134,27 +134,27 @@ export default {
   &__wrap {
     display: flex;
 
-    @media(max-width: 960px){
-        display: block;
+    @media (max-width: 960px) {
+      display: block;
     }
   }
 
-  &__col{
+  &__col {
     flex: 1;
   }
-  &__button{
+  &__button {
     cursor: pointer;
-    font-style:italic;
+    font-style: italic;
   }
 }
-.status{
-    &__message{
-        margin: 30px 0;
+.status {
+  &__message {
+    margin: 30px 0;
 
-        &-text{
-            font-size: 20px;
-        }
+    &-text {
+      font-size: 20px;
     }
+  }
 }
 .steps {
   margin: 50px 0;
@@ -191,9 +191,8 @@ export default {
       }
     }
 
-
-    @media(max-width: 320px){
-        padding-bottom: 20px;
+    @media (max-width: 320px) {
+      padding-bottom: 20px;
     }
   }
 
