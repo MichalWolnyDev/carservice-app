@@ -15,6 +15,10 @@ export default {
     &__mode {
         &--equal{
             width: 50%;
+
+            @media(max-width: 768px){
+                width: 100%;
+            }
         }
     }
 }
