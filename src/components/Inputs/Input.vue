@@ -3,21 +3,37 @@
     <label class="input__label">
       <slot></slot>
     </label>
-    <input class="input__item" :type="type" :placeholder="placeholder" @input="handleInput"/>
+    <input
+      class="input__item"
+      :type="type"
+      :class="{'error': error}"
+      :placeholder="placeholder"
+      @input="handleInput"
+    />
   </div>
 </template>
 <script>
 export default {
-  props: ["type", "placeholder", "value"],
+  props: {
+    type: {
+      type: String,
+    },
+    placeholder: {
+      type: String,
+    },
+    error: {
+      type: Boolean
+    }
+
+  },
   data() {
     return {
-    }
+    };
   },
   methods: {
-    // helper method for two way v-model binding
     handleInput(e) {
-      this.$emit('input', e.target.value)
-    }
+      this.$emit("input", e.target.value);
+    },
   }
 };
 </script>
@@ -39,6 +55,10 @@ export default {
     &[type="text"],
     &[type="password"] {
       outline: none;
+    }
+
+    &.error {
+      border: 1px solid $redError;
     }
   }
 }

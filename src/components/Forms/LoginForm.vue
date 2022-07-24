@@ -3,28 +3,46 @@
     <div class="loginform__wrap">
       <h1 class="loginform__title">Witaj!</h1>
       <p class="loginform__subtitle">Zaloguj się do swojego konta.</p>
-      <div class="loginform__input">
-        <Input type="text" v-model="formData.email">
-          <template> E-mail </template>
-        </Input>
-      </div>
-      <div class="loginform__input">
-        <Input type="password" v-model="formData.password">
-          <template> Hasło </template>
-        </Input>
-      </div>
-      <div class="loginform__button">
-        <Button :blue="true" :big="true"> Zaloguj </Button>
-      </div>
-      <p class="loginform__annotation">
-        Nie masz konta? <span @click="$emit('changeSignForm','register')">Zarejestruj się!</span>
-      </p>
+      <form>
+        <!-- <div class="" v-if="$v.formData.$error">
+          Uzupełnij wszystkie pola!
+        </div> -->
+        <div class="loginform__input">
+          <Input type="text" v-model.trim="$v.formData.email.$model" :error="$v.formData.email.$error">
+            <template> E-mail </template>
+          </Input>
+          <p class="loginform__input-error" v-if="$v.formData.email.$error">
+            Niepoprawny adres e-mail
+          </p>
+        </div>
+        <div class="loginform__input">
+          <Input type="password" v-model.trim="$v.formData.password.$model" :error="$v.formData.password.$error">
+            <template> Hasło </template>
+          </Input>
+          <p class="loginform__input-error" v-if="$v.formData.email.$error">
+            Hasło musi mieć min. 8 znaków
+          </p>
+        </div>
+        <div class="loginform__button">
+          <Button :blue="true" :big="true" @click.native.prevent="submit">
+            Zaloguj
+          </Button>
+        </div>
+        <p class="loginform__annotation">
+          Nie masz konta?
+          <span @click="$emit('changeSignForm', 'register')"
+            >Zarejestruj się!</span
+          >
+        </p>
+      </form>
     </div>
   </div>
 </template>
 <script>
 import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
+import { required, email, minLength } from "vuelidate/lib/validators";
+
 export default {
   components: {
     Input,
@@ -33,11 +51,26 @@ export default {
   data() {
     return {
       formData: {
-        email: '',
-        password: ''
-      }
-    }
-  }
+        email: "",
+        password: "",
+      },
+    };
+  },
+  validations: {
+    formData: {
+      password: { required, minLength: minLength(8) },
+      email: { required, email },
+    },
+  },
+  methods: {
+    submit() {
+      this.$v.$touch();
+      // if its still pending or an error is returned do not submit
+      if (this.$v.formData.$pending || this.$v.formData.$error) return;
+      // to form submit after this
+      alert("Form submitted");
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -62,8 +95,15 @@ export default {
       cursor: pointer;
     }
   }
+  &__input {
+    &-error {
+      color: $redError;
+      font-size: .6rem;
+      margin: 0;
+    }
+  }
 
-  @media(max-width: 600px){
+  @media (max-width: 600px) {
     min-width: 100%;
   }
 }

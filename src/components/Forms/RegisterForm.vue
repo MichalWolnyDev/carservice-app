@@ -4,35 +4,75 @@
       <h1 class="registerform__title">Zarejestruj się!</h1>
       <p class="registerform__subtitle">To szybkie i proste.</p>
       <div class="registerform__input">
-        <Input type="text" v-model="formData.firstName">
+        <Input
+          type="text"
+          v-model.trim="$v.formData.firstName.$model"
+          :error="$v.formData.firstName.$error"
+        >
           <template> Imię </template>
         </Input>
+        <p class="loginform__input-error" v-if="$v.formData.firstName.$error">
+          To pole jest wymagane
+        </p>
       </div>
       <div class="registerform__input">
-        <Input type="text" v-model="formData.surname">
+        <Input
+          type="text"
+          v-model.trim="$v.formData.surname.$model"
+          :error="$v.formData.surname.$error"
+        >
           <template> Nazwisko </template>
         </Input>
+        <p class="loginform__input-error" v-if="$v.formData.surname.$error">
+          To pole jest wymagane
+        </p>
       </div>
       <div class="registerform__input">
-        <Input type="text" v-model="formData.email">
+        <Input
+          type="text"
+          v-model.trim="$v.formData.email.$model"
+          :error="$v.formData.email.$error"
+        >
           <template> E-mail </template>
         </Input>
+        <p class="loginform__input-error" v-if="$v.formData.email.$error">
+          Niepoprawny adres e-mail
+        </p>
       </div>
       <div class="registerform__input">
-        <Input type="password" v-model="formData.password">
+        <Input
+          type="password"
+          v-model.trim="$v.formData.password.$model"
+          :error="$v.formData.password.$error"
+        >
           <template> Hasło </template>
         </Input>
+        <p class="loginform__input-error" v-if="$v.formData.password.$error">
+          Hasło musi mieć min. 8 znaków
+        </p>
       </div>
       <div class="registerform__input">
-        <Input type="password" v-model="formData.confirmPassword">
+        <Input
+          type="password"
+          v-model.trim="$v.formData.confirmPassword.$model"
+          :error="$v.formData.confirmPassword.$error"
+        >
           <template> Powtórz hasło </template>
         </Input>
+        <p
+          class="loginform__input-error"
+          v-if="!$v.formData.confirmPassword.sameAsPassword"
+        >
+          Hasła muszą być identyczne
+        </p>
       </div>
       <div class="registerform__button">
-        <Button :blue="true" :big="true"> Zarejestruj </Button>
+        <Button :blue="true" :big="true" @click.native.prevent="submit">
+          Zarejestruj
+        </Button>
       </div>
-     <p class="registerform__annotation">
-        <span @click="$emit('changeSignForm','login')">Wróć do logowania</span>
+      <p class="registerform__annotation">
+        <span @click="$emit('changeSignForm', 'login')">Wróć do logowania</span>
       </p>
     </div>
   </div>
@@ -40,6 +80,8 @@
 <script>
 import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+
 export default {
   components: {
     Input,
@@ -48,14 +90,34 @@ export default {
   data() {
     return {
       formData: {
-        firstName: '',
-        surname: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      }
-    }
-  }
+        firstName: "",
+        surname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+    };
+  },
+  validations: {
+    formData: {
+      firstName: { required },
+      surname: { required },
+      password: { required, minLength: minLength(8) },
+      email: { required, email },
+      confirmPassword: {
+        sameAsPassword: sameAs("password"),
+      },
+    },
+  },
+  methods: {
+    submit() {
+      this.$v.$touch();
+      // if its still pending or an error is returned do not submit
+      if (this.$v.formData.$pending || this.$v.formData.$error) return;
+      // to form submit after this
+      alert("Form submitted");
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -80,8 +142,15 @@ export default {
       cursor: pointer;
     }
   }
+  &__input {
+    &-error {
+      color: $redError;
+      font-size: 0.6rem;
+      margin: 0;
+    }
+  }
 
-   @media(max-width: 600px){
+  @media (max-width: 600px) {
     min-width: 100%;
   }
 }

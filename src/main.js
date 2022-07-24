@@ -5,7 +5,9 @@ import store from './store'
 import VCalendar from 'v-calendar';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuelidate from "vuelidate";
 
+Vue.use(Vuelidate)
 Vue.use(VCalendar, {
   componentPrefix: 'vc',
 });
