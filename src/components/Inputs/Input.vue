@@ -3,12 +3,22 @@
     <label class="input__label">
       <slot></slot>
     </label>
-    <input class="input__item" :type="type" :placeholder="placeholder" />
+    <input class="input__item" :type="type" :placeholder="placeholder" @input="handleInput"/>
   </div>
 </template>
 <script>
 export default {
-  props: ["type", "placeholder"],
+  props: ["type", "placeholder", "value"],
+  data() {
+    return {
+    }
+  },
+  methods: {
+    // helper method for two way v-model binding
+    handleInput(e) {
+      this.$emit('input', e.target.value)
+    }
+  }
 };
 </script>
 <style lang="scss">

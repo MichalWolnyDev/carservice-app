@@ -4,27 +4,27 @@
       <h1 class="registerform__title">Zarejestruj się!</h1>
       <p class="registerform__subtitle">To szybkie i proste.</p>
       <div class="registerform__input">
-        <Input type="text">
+        <Input type="text" v-model="formData.firstName">
           <template> Imię </template>
         </Input>
       </div>
       <div class="registerform__input">
-        <Input type="text">
+        <Input type="text" v-model="formData.surname">
           <template> Nazwisko </template>
         </Input>
       </div>
       <div class="registerform__input">
-        <Input type="text">
+        <Input type="text" v-model="formData.email">
           <template> E-mail </template>
         </Input>
       </div>
       <div class="registerform__input">
-        <Input type="password">
+        <Input type="password" v-model="formData.password">
           <template> Hasło </template>
         </Input>
       </div>
       <div class="registerform__input">
-        <Input type="password">
+        <Input type="password" v-model="formData.confirmPassword">
           <template> Powtórz hasło </template>
         </Input>
       </div>
@@ -45,6 +45,17 @@ export default {
     Input,
     Button,
   },
+  data() {
+    return {
+      formData: {
+        firstName: '',
+        surname: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      }
+    }
+  }
 };
 </script>
 <style lang="scss">

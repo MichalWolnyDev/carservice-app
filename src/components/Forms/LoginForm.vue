@@ -4,12 +4,12 @@
       <h1 class="loginform__title">Witaj!</h1>
       <p class="loginform__subtitle">Zaloguj się do swojego konta.</p>
       <div class="loginform__input">
-        <Input type="text">
+        <Input type="text" v-model="formData.email">
           <template> E-mail </template>
         </Input>
       </div>
       <div class="loginform__input">
-        <Input type="password">
+        <Input type="password" v-model="formData.password">
           <template> Hasło </template>
         </Input>
       </div>
@@ -30,6 +30,14 @@ export default {
     Input,
     Button,
   },
+  data() {
+    return {
+      formData: {
+        email: '',
+        password: ''
+      }
+    }
+  }
 };
 </script>
 <style lang="scss">
