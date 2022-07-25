@@ -19,6 +19,10 @@
             <td>xyz@abc.com</td>
           </tr>
           <tr>
+            <th>Numer telefonu:</th>
+            <td>+48213769420</td>
+          </tr>
+          <tr>
             <th>Twoja rola w serwisie:</th>
             <td class="profile__admin">ADMIN</td>
           </tr>

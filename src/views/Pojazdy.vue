@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <div class="">
-      <h2 class="title title__h2 text__center">Moje pojazdy</h2>
-    </div>
+  <div> 
+   <ListingCars  />
   </div>
 </template>
+<script>
+  import ListingCars from "@/components/Listing/ListingCars.vue";
+  export default {
+  components: {
+    ListingCars
+  }
+  }
+</script>
