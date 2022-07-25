@@ -41,6 +41,16 @@
       </div>
       <div class="registerform__input">
         <Input
+          type="text"
+          v-model="formData.phoneNumber"
+          
+        >
+          <template> Numer telefonu (niewymagany) </template>
+        </Input>
+      
+      </div>
+      <div class="registerform__input">
+        <Input
           type="password"
           v-model.trim="$v.formData.password.$model"
           :error="$v.formData.password.$error"
@@ -95,6 +105,7 @@ export default {
         email: "",
         password: "",
         confirmPassword: "",
+        phoneNumber: "",
       },
     };
   },
