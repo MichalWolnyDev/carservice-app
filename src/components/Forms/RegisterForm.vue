@@ -40,14 +40,9 @@
         </p>
       </div>
       <div class="registerform__input">
-        <Input
-          type="text"
-          v-model="formData.phoneNumber"
-          
-        >
+        <Input type="text" v-model="formData.phoneNumber">
           <template> Numer telefonu (niewymagany) </template>
         </Input>
-      
       </div>
       <div class="registerform__input">
         <Input
@@ -77,7 +72,7 @@
         </p>
       </div>
       <div class="registerform__button">
-        <Button :blue="true" :big="true" @click.native.prevent="submit">
+        <Button :blue="true" :big="true" @click.native.prevent="register">
           Zarejestruj
         </Button>
       </div>
@@ -127,6 +122,39 @@ export default {
       if (this.$v.formData.$pending || this.$v.formData.$error) return;
       // to form submit after this
       alert("Form submitted");
+    },
+    async register() {
+      const BASE_URL = process.env.VUE_APP_BASEURL;
+
+      this.$v.$touch();
+      // if its still pending or an error is returned do not submit
+      if (this.$v.formData.$pending || this.$v.formData.$error) {
+        return;
+      } else {
+        this.$axios
+          .post(
+            BASE_URL + "/auth/register",
+            {
+              password: this.formData.password,
+              firstName: this.formData.firstName,
+              lastName: this.formData.surname,
+              email: this.formData.email,
+              phone: this.formData.phoneNumber,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };
