@@ -140,6 +140,7 @@ export default {
               lastName: this.formData.surname,
               email: this.formData.email,
               phone: this.formData.phoneNumber,
+              role: "USER"
             },
             {
               headers: {

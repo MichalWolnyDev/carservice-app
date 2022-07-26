@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="loginform__button">
-          <Button :blue="true" :big="true" @click.native.prevent="submit">
+          <Button :blue="true" :big="true" @click.native.prevent="login">
             Zaloguj
           </Button>
         </div>
@@ -69,6 +69,36 @@ export default {
       if (this.$v.formData.$pending || this.$v.formData.$error) return;
       // to form submit after this
       alert("Form submitted");
+    },
+    async login() {
+      const BASE_URL = process.env.VUE_APP_BASEURL;
+
+      this.$v.$touch();
+      // if its still pending or an error is returned do not submit
+      if (this.$v.formData.$pending || this.$v.formData.$error) {
+        return;
+      } else {
+        this.$axios
+          .post(
+            BASE_URL + "/auth/login",
+            {
+              password: this.formData.password,
+              email: this.formData.email,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };
