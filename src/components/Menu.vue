@@ -4,7 +4,10 @@
       <div class="menu__wrap mobile">
         <Hamburger @wasClicked="mobileMenu = !mobileMenu" />
       </div>
+        
       <div class="menu__wrap" v-if="mobileMenu">
+      <div class="menu__user">Jesteś zalogowany jako: 
+      <div class="menu__user__name">Karol Wiśniewski </div></div>
         <router-link to="/login">
           <div class="menu__item">Login page (roboczo)</div>
         </router-link>
@@ -23,8 +26,14 @@
         <router-link to="/status">
           <div class="menu__item">Status naprawy</div>
         </router-link>
+        <div class="menu__wrap__logout" v-if="mobileMenu">
+        <router-link to="/logout">
+          <div class="menu__item">Wyloguj</div>
+        </router-link>
+        </div>
       </div>
     </div>
+  
   </div>
 </template>
 
@@ -62,7 +71,7 @@ export default {
 .menu {
   background-color: $darkBlue;
   height: 100%;
-
+  
   &__box {
     @media (min-width: 960px) {
       height: 100vh;
@@ -77,7 +86,20 @@ export default {
     display: flex;
     flex-direction: column;
     color: #fff;
-
+    height: 100%;
+    &.mobile {
+      display: none;
+      @media (max-width: 960px) {
+        display: block;
+      }
+    }
+  }
+  &__wrap__logout {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    
     &.mobile {
       display: none;
       @media (max-width: 960px) {
@@ -91,6 +113,19 @@ export default {
 
     &:hover {
       background-color: $blueActive;
+    }
+  }
+  &__user {
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+    font-weight:lighter;
+    font-size:large;
+    margin-bottom:10px;
+    &:hover {
+      background-color: $blueActive;
+    }
+    &__name{
+      font-size:larger;
     }
   }
 }

@@ -128,6 +128,12 @@
  &__table{
      text-align:left;
   }
+  th{
+    font-weight:bold;
+    padding-right:10px;
+  }
+ 
+ 
   &.shadow {
     -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 1);
