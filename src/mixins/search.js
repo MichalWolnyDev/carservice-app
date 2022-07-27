@@ -1,4 +1,4 @@
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
     data() {
@@ -6,14 +6,19 @@ export default {
         }
     },
     computed: {
+        ...mapState(['garages','register','login']),
         ...mapGetters({
             getGarages: 'getGarages',
-            getChosenGarage: 'getChosenGarage'
+            getChosenGarage: 'getChosenGarage',
+            getToken: 'getToken',
+            getUserToken: 'getUserToken'
         })
     },
     methods: {
         ...mapActions({
             fetchGarages: 'fetchGarages',
+            userRegister: 'userRegister',
+            userLogin: 'userLogin'
          
         })
     },

@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="loginform__button">
-          <Button :blue="true" :big="true" @click.native.prevent="login">
+          <Button :blue="true" :big="true" @click.native.prevent="submitLogin">
             Zaloguj
           </Button>
         </div>
@@ -43,7 +43,10 @@ import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength } from "vuelidate/lib/validators";
 
+import search from "@/mixins/search";
+
 export default {
+  mixins: [search],
   components: {
     Input,
     Button,
@@ -63,41 +66,14 @@ export default {
     },
   },
   methods: {
-    submit() {
-      this.$v.$touch();
-      // if its still pending or an error is returned do not submit
-      if (this.$v.formData.$pending || this.$v.formData.$error) return;
-      // to form submit after this
-      alert("Form submitted");
-    },
-    async login() {
-      const BASE_URL = process.env.VUE_APP_BASEURL;
+    async submitLogin() {
 
       this.$v.$touch();
       // if its still pending or an error is returned do not submit
       if (this.$v.formData.$pending || this.$v.formData.$error) {
         return;
       } else {
-        this.$axios
-          .post(
-            BASE_URL + "/auth/login",
-            {
-              password: this.formData.password,
-              email: this.formData.email,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json;charset=UTF-8",
-                "Access-Control-Allow-Origin": "*",
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+       this.userLogin(this.formData);
       }
     },
   },

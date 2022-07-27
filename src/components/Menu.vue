@@ -4,10 +4,12 @@
       <div class="menu__wrap mobile">
         <Hamburger @wasClicked="mobileMenu = !mobileMenu" />
       </div>
-        
+
       <div class="menu__wrap" v-if="mobileMenu">
-     <div class="menu__user">Jesteś zalogowany jako: 
-      <div class="menu__user-name">Karol Wiśniewski </div></div>
+        <div class="menu__user">
+          Jesteś zalogowany jako:
+          <div class="menu__user-name">Karol Wiśniewski</div>
+        </div>
         <router-link to="/login">
           <div class="menu__item">Login page (roboczo)</div>
         </router-link>
@@ -26,12 +28,9 @@
         <router-link to="/status">
           <div class="menu__item">Status naprawy</div>
         </router-link>
-        <router-link class="menu__item-bottom" to="/logout">
-          <div class="menu__item">Wyloguj</div>
-        </router-link>
+        <div class="menu__item menu__item-bottom" @click="logout">Wyloguj</div>
       </div>
     </div>
-  
   </div>
 </template>
 
@@ -56,6 +55,10 @@ export default {
         this.mobileMenu = false;
       }
     },
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/login");
+    },
   },
   mounted() {
     // window.onresize = this.checkWindowWidth();
@@ -69,7 +72,7 @@ export default {
 .menu {
   background-color: $darkBlue;
   height: 100%;
-  
+
   &__box {
     @media (min-width: 960px) {
       height: 100vh;
@@ -84,7 +87,7 @@ export default {
     display: flex;
     flex-direction: column;
     color: #fff;
-    height:100%;
+    height: 100%;
     &.mobile {
       display: none;
       @media (max-width: 960px) {
@@ -99,20 +102,21 @@ export default {
       background-color: $blueActive;
     }
     &-bottom {
-    margin-top: auto;
-    &:hover {
-      background-color: $blueActive;
-    }
+      cursor: pointer;
+      margin-top: auto;
+      &:hover {
+        background-color: $blueActive;
+      }
     }
   }
   &__user {
     padding: 1rem;
     transition: all 0.3s ease-in-out;
-    font-weight:lighter;
-    font-size:large;
-    margin-bottom:10px;
-  &-name {
-      font-size:larger;
+    font-weight: lighter;
+    font-size: large;
+    margin-bottom: 10px;
+    &-name {
+      font-size: larger;
     }
   }
 }

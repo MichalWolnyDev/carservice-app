@@ -5,7 +5,7 @@
         <div class="login__col">
           <div class="login__content">
             <LoginForm @changeSignForm="showForm = $event" v-if="showForm == 'login'"/>
-            <RegisterForm @changeSignForm="showForm = $event" v-if="showForm == 'register'"/>
+            <RegisterForm @changeSignForm="showForm = $event" @goToLoginForm="changeForm" v-if="showForm == 'register'"/>
             
           </div>
         </div>
@@ -75,6 +75,11 @@ export default {
       ],
     };
   },
+  methods: {
+    changeForm(){
+      this.showForm = 'login'
+    }
+  }
 };
 </script>
 <style lang="scss">

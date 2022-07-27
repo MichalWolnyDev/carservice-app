@@ -72,7 +72,7 @@
         </p>
       </div>
       <div class="registerform__button">
-        <Button :blue="true" :big="true" @click.native.prevent="register">
+        <Button :blue="true" :big="true" @click.native.prevent="submitRegister">
           Zarejestruj
         </Button>
       </div>
@@ -86,8 +86,10 @@
 import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import search from "@/mixins/search";
 
 export default {
+  mixins: [search],
   components: {
     Input,
     Button,
@@ -116,45 +118,29 @@ export default {
     },
   },
   methods: {
-    submit() {
-      this.$v.$touch();
-      // if its still pending or an error is returned do not submit
-      if (this.$v.formData.$pending || this.$v.formData.$error) return;
-      // to form submit after this
-      alert("Form submitted");
-    },
-    async register() {
-      const BASE_URL = process.env.VUE_APP_BASEURL;
-
+    async submitRegister() {
+      var _this = this;
       this.$v.$touch();
       // if its still pending or an error is returned do not submit
       if (this.$v.formData.$pending || this.$v.formData.$error) {
         return;
       } else {
-        this.$axios
-          .post(
-            BASE_URL + "/auth/register",
-            {
-              password: this.formData.password,
-              firstName: this.formData.firstName,
-              lastName: this.formData.surname,
-              email: this.formData.email,
-              phone: this.formData.phoneNumber,
-              role: "USER"
-            },
-            {
-              headers: {
-                "Content-Type": "application/json;charset=UTF-8",
-                "Access-Control-Allow-Origin": "*",
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        // const data = new FormData();
+        // data.append("firstName", this.formData.firstName);
+        // data.append("lastName", this.formData.surname);
+        // data.append("email", this.formData.email);
+        // data.append("password", this.formData.password);
+        // data.append("phone", this.formData.phoneNumber);
+        // data.append("role", "USER");
+
+        
+        this.userRegister(this.formData);
+
+        setTimeout(function(){
+        _this.$emit('goToLoginForm', true)
+
+        }, 1500)
+
       }
     },
   },

@@ -8,11 +8,13 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+    meta: { guest: true }
   },
   {
     path: '',
     component: () => import(/* webpackChunkName: "" */ '../LoggedInApp.vue'),
+    meta: {requiresAuth: true},
     children: [
       {
         path: '/',
@@ -50,8 +52,33 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: process.env.BASEURL,
   routes
 })
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('token') != null) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (localStorage.getItem('token') != null) {
+      next("/");
+      return;
+    }
+    next();
+  } else {
+    next();
+  }
+});
 
 export default router
