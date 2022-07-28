@@ -72,14 +72,16 @@
         </p>
       </div>
       <div class="registerform__button">
-        <Button :blue="true" :big="true" @click.native.prevent="submitRegister">
+        <Button :blue="true" :big="true" v-if="!showLoader" @click.native.prevent="submitRegister">
           Zarejestruj
         </Button>
-      </div>
-      <p class="registerform__annotation">
-        <span @click="$emit('changeSignForm', 'login')">Wróć do logowania</span>
+        <div class="showLoader" v-else><Loader /></div>
+      <p class="registerform__annotation"> 
+        <span @click="$emit('changeSignForm', 'login')">Wróć do logowania></span>
       </p>
     </div>
+      </div>
+      
   </div>
 </template>
 <script>
@@ -87,15 +89,17 @@ import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import search from "@/mixins/search";
-
+import Loader from "@/components/Inputs/Loader.vue";
 export default {
   mixins: [search],
   components: {
     Input,
     Button,
+    Loader,
   },
   data() {
     return {
+     
       formData: {
         firstName: "",
         surname: "",
@@ -103,7 +107,8 @@ export default {
         password: "",
         confirmPassword: "",
         phoneNumber: "",
-      },
+       },
+       showLoader:false,
     };
   },
   validations: {
@@ -121,8 +126,9 @@ export default {
     async submitRegister() {
       var _this = this;
       this.$v.$touch();
+      this.showLoader = true;
       // if its still pending or an error is returned do not submit
-      if (this.$v.formData.$pending || this.$v.formData.$error) {
+      if (this.$v.formData.$pending || this.$v.formData.$error) { this.showLoader = false 
         return;
       } else {
         // const data = new FormData();
@@ -135,12 +141,9 @@ export default {
 
         
         this.userRegister(this.formData);
-
         setTimeout(function(){
         _this.$emit('goToLoginForm', true)
-
         }, 1500)
-
       }
     },
   },
