@@ -6,19 +6,22 @@ export default {
         }
     },
     computed: {
-        ...mapState(['garages','register','login']),
+        ...mapState(['garages','register','login', 'user']),
         ...mapGetters({
             getGarages: 'getGarages',
             getChosenGarage: 'getChosenGarage',
             getToken: 'getToken',
-            getUserToken: 'getUserToken'
+            getUserToken: 'getUserToken',
+            getUserInfo: 'getUserInfo'
         })
     },
     methods: {
         ...mapActions({
             fetchGarages: 'fetchGarages',
             userRegister: 'userRegister',
-            userLogin: 'userLogin'
+            userLogin: 'userLogin',
+            fetchUserInfo: 'fetchUserInfo',
+            resetUserInfo: 'resetUserInfo'
          
         })
     },

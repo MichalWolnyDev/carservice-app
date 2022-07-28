@@ -26,10 +26,6 @@ export default {
   actions: {
     async userRegister({ commit }, formdata) {
 
-      // var object = {};
-      // formdata.forEach((value, key) => object[key] = value);
-      // var jsonFormData = JSON.stringify(object);
-
       await axios
         .post(
           BASE_URL + "/auth/register",

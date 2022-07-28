@@ -8,7 +8,11 @@
           Uzupełnij wszystkie pola!
         </div> -->
         <div class="loginform__input">
-          <Input type="text" v-model.trim="$v.formData.email.$model" :error="$v.formData.email.$error">
+          <Input
+            type="text"
+            v-model.trim="$v.formData.email.$model"
+            :error="$v.formData.email.$error"
+          >
             <template> E-mail </template>
           </Input>
           <p class="loginform__input-error" v-if="$v.formData.email.$error">
@@ -16,7 +20,11 @@
           </p>
         </div>
         <div class="loginform__input">
-          <Input type="password" v-model.trim="$v.formData.password.$model" :error="$v.formData.password.$error">
+          <Input
+            type="password"
+            v-model.trim="$v.formData.password.$model"
+            :error="$v.formData.password.$error"
+          >
             <template> Hasło </template>
           </Input>
           <p class="loginform__input-error" v-if="$v.formData.email.$error">
@@ -24,9 +32,15 @@
           </p>
         </div>
         <div class="loginform__button">
-          <Button :blue="true" :big="true" @click.native.prevent="submitLogin">
+          <Button
+            :blue="true"
+            :big="true"
+            v-if="!showLoader"
+            @click.native.prevent="submitLogin"
+          >
             Zaloguj
           </Button>
+          <Loader v-else />
         </div>
         <p class="loginform__annotation">
           Nie masz konta?
@@ -42,14 +56,18 @@
 import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength } from "vuelidate/lib/validators";
+import Loader from "@/components/Inputs/Loader.vue";
 
 import search from "@/mixins/search";
+
+import router from "../../router/index.js";
 
 export default {
   mixins: [search],
   components: {
     Input,
     Button,
+    Loader,
   },
   data() {
     return {
@@ -57,6 +75,7 @@ export default {
         email: "",
         password: "",
       },
+      showLoader: false,
     };
   },
   validations: {
@@ -67,13 +86,20 @@ export default {
   },
   methods: {
     async submitLogin() {
-
       this.$v.$touch();
+      this.showLoader = true;
       // if its still pending or an error is returned do not submit
       if (this.$v.formData.$pending || this.$v.formData.$error) {
+        this.showLoader = false;
         return;
       } else {
-       this.userLogin(this.formData);
+        this.showLoader = true;
+        this.userLogin(this.formData);
+
+        setTimeout(function () {
+          router.push("/")
+
+        }, 1000);
       }
     },
   },
@@ -104,7 +130,7 @@ export default {
   &__input {
     &-error {
       color: $redError;
-      font-size: .6rem;
+      font-size: 0.6rem;
       margin: 0;
     }
   }

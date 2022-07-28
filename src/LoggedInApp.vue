@@ -17,10 +17,15 @@
 
 <script>
 import Menu from "@/components/Menu.vue";
+import search from "@/mixins/search";
 
 export default {
+  mixins: [search],
   components: {
     Menu,
+  },
+  created() {
+    this.fetchUserInfo();
   },
 };
 </script>

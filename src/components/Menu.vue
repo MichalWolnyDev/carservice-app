@@ -8,11 +8,8 @@
       <div class="menu__wrap" v-if="mobileMenu">
         <div class="menu__user">
           Jesteś zalogowany jako:
-          <div class="menu__user-name">Karol Wiśniewski</div>
+          <div class="menu__user-name">{{ getUserInfo.firstName }} {{ getUserInfo.lastName }}</div>
         </div>
-        <router-link to="/login">
-          <div class="menu__item">Login page (roboczo)</div>
-        </router-link>
         <router-link to="/">
           <div class="menu__item">Strona główna</div>
         </router-link>
@@ -36,8 +33,10 @@
 
 <script>
 import Hamburger from "@/components/Menu/Hamburger.vue";
+import search from "@/mixins/search";
 export default {
   name: "Menu",
+  mixins: [search],
   components: {
     Hamburger,
   },
@@ -57,7 +56,11 @@ export default {
     },
     logout() {
       localStorage.removeItem("token");
+      this.resetUserInfo()
+        window.location.reload(true);
+
       this.$router.push("/login");
+
     },
   },
   mounted() {
@@ -117,6 +120,7 @@ export default {
     margin-bottom: 10px;
     &-name {
       font-size: larger;
+      text-transform: capitalize;
     }
   }
 }

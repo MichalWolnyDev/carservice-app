@@ -75,7 +75,7 @@
         <Button :blue="true" :big="true" v-if="!showLoader" @click.native.prevent="submitRegister">
           Zarejestruj
         </Button>
-        <div class="showLoader" v-else><Loader /></div>
+        <Loader v-else />
       <p class="registerform__annotation"> 
         <span @click="$emit('changeSignForm', 'login')">Wróć do logowania></span>
       </p>
@@ -128,17 +128,10 @@ export default {
       this.$v.$touch();
       this.showLoader = true;
       // if its still pending or an error is returned do not submit
-      if (this.$v.formData.$pending || this.$v.formData.$error) { this.showLoader = false 
+      if (this.$v.formData.$pending || this.$v.formData.$error) { 
+        this.showLoader = false 
         return;
       } else {
-        // const data = new FormData();
-        // data.append("firstName", this.formData.firstName);
-        // data.append("lastName", this.formData.surname);
-        // data.append("email", this.formData.email);
-        // data.append("password", this.formData.password);
-        // data.append("phone", this.formData.phoneNumber);
-        // data.append("role", "USER");
-
         
         this.userRegister(this.formData);
         setTimeout(function(){
