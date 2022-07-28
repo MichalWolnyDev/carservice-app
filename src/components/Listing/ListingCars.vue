@@ -21,7 +21,11 @@
           </tr>
           <tr>
            <th>Silnik:</th>
-           <td>2.0</td>
+           <td>2.0 8V</td>
+          </tr>
+          <tr>
+            <th>Moc silnika:</th>
+            <td>130 KM</td>
           </tr>
           <tr>
            <th>Rodzaj skrzyni biegów:</th>
@@ -61,6 +65,10 @@
            <th>Silnik:</th>
            <td>1.6 D</td>
           </tr>
+           <tr>
+            <th>Moc silnika:</th>
+            <td>136 KM</td>
+          </tr>
           <tr>
             <th>Rodzaj skrzyni biegów:</th>
             <td>Manualna</td>
@@ -98,6 +106,10 @@
           <tr>
            <th>Silnik:</th>
            <td>1.1</td>
+          </tr>
+           <tr>
+            <th>Moc silnika:</th>
+            <td>50 KM</td>
           </tr>
           <tr>
            <th>Rodzaj skrzyni biegów:</th>
