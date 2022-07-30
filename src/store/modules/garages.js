@@ -31,7 +31,12 @@ export default {
   actions: {
     async fetchGarages({ commit }) {
       console.log(BASE_URL)
-      await axios.get(BASE_URL + '/garages')
+      await axios.get(BASE_URL + '/garages', {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true
+        }
+      })
         .then((res) => {
 
           commit("setGarageList", res.data)

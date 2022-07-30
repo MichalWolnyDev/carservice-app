@@ -29,7 +29,11 @@ export default {
       var token = localStorage.getItem('token');
       if (token != '') {
         await axios.get(BASE_URL + '/@me', {
-          headers: { "Authorization": `Bearer ${token}` }
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            "Authorization": `Bearer ${token}`
+          }
         })
           .then((res) => {
 
