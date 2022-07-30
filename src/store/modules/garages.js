@@ -33,6 +33,7 @@ export default {
       console.log(BASE_URL)
       await axios.get(BASE_URL + '/garages', {
         headers: {
+          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true
         }

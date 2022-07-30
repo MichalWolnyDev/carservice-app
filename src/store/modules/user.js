@@ -30,6 +30,7 @@ export default {
       if (token != '') {
         await axios.get(BASE_URL + '/@me', {
           headers: {
+            "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
             "Authorization": `Bearer ${token}`
