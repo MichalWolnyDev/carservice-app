@@ -19,8 +19,6 @@ const store = new Vuex.Store({
   }
 })
 
-store.dispatch('fetchGarages')
-
 
 export default store;
 

@@ -42,17 +42,19 @@
     <div>
       <div class="listing" v-if="showListing">
         <div class="" v-for="(garage, id) in getGarages" :key="id">
-          <ListingItem :garage="garage" @openModal="showModal = true"/>
-
+          <ListingItem :garage="garage" @openModal="showModal = true" />
         </div>
       </div>
       <div v-if="showLoader">
         <Loader />
       </div>
     </div>
-    <Modal v-if="showModal" @closeModal="showModal = false" title="Rezerwacja wizyty">
-      <ReservationForm @openModal="showModal = false"/>
-
+    <Modal
+      v-if="showModal"
+      @closeModal="showModal = false"
+      title="Rezerwacja wizyty"
+    >
+      <ReservationForm @openModal="showModal = false" />
     </Modal>
   </div>
 </template>
@@ -67,7 +69,6 @@ import Modal from "@/components/Modal";
 
 import search from "@/mixins/search";
 
-
 export default {
   mixins: [search],
   components: {
@@ -77,7 +78,7 @@ export default {
     ListingItem,
     Loader,
     Modal,
-    ReservationForm
+    ReservationForm,
   },
   data() {
     return {
@@ -130,6 +131,9 @@ export default {
       console.log(e);
       this.searchData.localization = e;
     },
+  },
+  mounted() {
+    this.fetchGarages();
   },
 };
 </script>
