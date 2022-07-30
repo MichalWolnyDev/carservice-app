@@ -26,18 +26,24 @@ export default {
   },
   actions: {
     async fetchUserInfo({ commit }) {
-      await axios.get(BASE_URL + '/@me')
-        .then((res) => {
-
-          commit("setUserInfo", res.data)
+      var token = localStorage.getItem('token');
+      if (token != '') {
+        await axios.get(BASE_URL + '/@me', {
+          headers: { "Authorization": `Bearer ${token}` }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+
+            commit("setUserInfo", res.data)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
     },
-    resetUserInfo({commit}){
-        commit("setUserInfo", [])
+    resetUserInfo({ commit }) {
+      commit("setUserInfo", [])
     }
-   
+
   },
 }

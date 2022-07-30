@@ -95,10 +95,8 @@ export default {
       } else {
         this.showLoader = true;
         this.userLogin(this.formData);
-
         setTimeout(function () {
-          router.push("/")
-
+          router.push("/");
         }, 1000);
       }
     },

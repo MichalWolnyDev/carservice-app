@@ -24,7 +24,7 @@ export default {
   components: {
     Menu,
   },
-  created() {
+  mounted() {
     this.fetchUserInfo();
   },
 };
