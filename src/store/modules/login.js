@@ -33,17 +33,17 @@ export default {
           {
             email: formdata.email,
             password: formdata.password
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Credentials": true,
-              "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-
-            },
           }
+          // {
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //     "Access-Control-Allow-Origin": "*",
+          //     "Access-Control-Allow-Credentials": true,
+          //     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+          //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+
+          //   },
+          // }
         )
         .then((res) => {
           console.log(res)
