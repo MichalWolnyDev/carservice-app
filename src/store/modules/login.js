@@ -36,9 +36,10 @@ export default {
           },
           {
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json;charset=utf-8",
               "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Headers": "Authorization",
+              "Access-Control-Allow-Headers": "Content-Type, Authorization",
+              "Access-Control-Allow-Methods": "*"
 
             },
           }
