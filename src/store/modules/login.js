@@ -25,14 +25,20 @@ export default {
 
   },
   actions: {
-    userLogin({ commit }, formdata) {
+    async userLogin({ commit }, formdata) {
 
-      axios
+     await axios
         .post(
           BASE_URL + "/auth/login",
           {
             email: formdata.email,
             password: formdata.password
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
+            },
           }
         )
         .then((res) => {
