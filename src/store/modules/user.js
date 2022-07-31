@@ -33,7 +33,7 @@ export default {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Headers": "Content-Type, authorization",
             "Authorization": `Bearer ${token}`
           }
         })

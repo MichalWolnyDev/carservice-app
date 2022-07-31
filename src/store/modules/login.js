@@ -38,7 +38,7 @@ export default {
             headers: {
               "Content-Type": "application/json;charset=utf-8",
               "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Headers": "Content-Type",
+              "Access-Control-Allow-Headers": "Content-Type, authorization",
               "Access-Control-Allow-Methods": "*"
 
             },
