@@ -25,9 +25,9 @@ export default {
 
   },
   actions: {
-    async userLogin({ commit }, formdata) {
+    userLogin({ commit }, formdata) {
 
-      await axios
+      axios
         .post(
           BASE_URL + "/auth/login",
           {
@@ -36,10 +36,9 @@ export default {
           },
           {
             headers: {
-              "Content-Type": "application/json;charset=utf-8",
               "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Headers": "Content-Type, authorization",
-              "Access-Control-Allow-Methods": "*"
+              "Access-Control-Allow-Methods": "POST",
+              "Access-Control-Allow-Headers": "Content-Type",
 
             },
           }
