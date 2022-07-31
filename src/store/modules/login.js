@@ -33,7 +33,7 @@ export default {
           {
             email: formdata.email,
             password: formdata.password
-          }
+          },
           {
             headers: {
               "Content-Type": "application/json",
