@@ -33,14 +33,6 @@ export default {
           {
             email: formdata.email,
             password: formdata.password
-          },
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Access-Control-Allow-Methods": "POST",
-              "Access-Control-Allow-Headers": "Content-Type",
-
-            },
           }
         )
         .then((res) => {
