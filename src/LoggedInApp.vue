@@ -25,7 +25,7 @@ export default {
     Menu,
   },
   mounted() {
-    // this.fetchUserInfo();
+    this.fetchUserInfo();
   },
 };
 </script>
