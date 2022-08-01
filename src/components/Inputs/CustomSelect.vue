@@ -13,7 +13,7 @@
           $emit('input', option);
         "
       >
-        {{ option }}
+        {{ option.name }}
       </div>
     </div>
   </div>
@@ -101,6 +101,8 @@ export default {
     left: 0;
     right: 0;
     z-index: 1;
+    max-height: 320px;
+    overflow-y: scroll;
 
     div {
       color: #000;

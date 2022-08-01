@@ -7,6 +7,7 @@ import garages from './modules/garages'
 import register from './modules/register'
 import login from './modules/login'
 import user from './modules/user'
+import cities from './modules/cities'
 
 
 const store = new Vuex.Store({
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     garages,
     register,
     login,
-    user
+    user,
+    cities
   }
 })
 

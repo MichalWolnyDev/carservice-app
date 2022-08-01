@@ -10,7 +10,7 @@
         </p>
         <p>
           {{ getChosenGarage.address }}, {{ getChosenGarage.postCode }}
-          {{ getChosenGarage.city }}
+          {{ getChosenGarage.city.name }}
         </p>
         <br>
         <p>
@@ -83,7 +83,12 @@ export default {
   },
   data() {
     return {
-      exampleCars: ["Mazda", "Opel"],
+      exampleCars: [{
+        name: "Mazda"
+      },
+      {
+        name: "Opel"
+      }],
       selectedCar: "",
       selectedDate: "",
       reservationMsg: "",

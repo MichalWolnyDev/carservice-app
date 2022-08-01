@@ -4,17 +4,11 @@
       <p class="listingItem__title">
         {{ garage.name }}
       </p>
-
       <div class="listingItem__wrap">
         <div class="listingItem__col">
+          
           <p class="listingItem__text">
-            {{ garage.city }}
-          </p>
-          <p class="listingItem__text">
-            {{ garage.province }}
-          </p>
-          <p class="listingItem__text">
-            {{ garage.address }} {{ garage.postCode }} {{ garage.city }}
+            {{ garage.address }} {{ garage.postCode }} {{ garage.city.name }}
           </p>
           <p class="listingItem__text">
             Godziny otwarcia: <br />

@@ -7,10 +7,10 @@
         <div class="search__row">
           <div class="search__item">
             <CustomSelect
-              :options="cities"
+              :options="getCities"
               :default="'Wybierz miasto'"
               class="select"
-              @input="chooseOption($event)"
+              @input="chooseOption($event); console.log($event)"
             />
           </div>
         </div>
@@ -88,7 +88,6 @@ export default {
       searchData: {
         localization: "",
       },
-      cities: ["Warszawa", "Poznań", "Kraków", "Wrocław"],
       services: [
         {
           label: "Wymiana oleju i filtra oleju",
@@ -133,6 +132,7 @@ export default {
     },
   },
   mounted() {
+    this.fetchCities();
     this.fetchGarages();
   },
 };

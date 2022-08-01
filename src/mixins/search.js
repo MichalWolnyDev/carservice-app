@@ -6,13 +6,14 @@ export default {
         }
     },
     computed: {
-        ...mapState(['garages','register','login', 'user']),
+        ...mapState(['garages','register','login', 'user', 'cities']),
         ...mapGetters({
             getGarages: 'getGarages',
             getChosenGarage: 'getChosenGarage',
             getToken: 'getToken',
             getUserToken: 'getUserToken',
-            getUserInfo: 'getUserInfo'
+            getUserInfo: 'getUserInfo',
+            getCities: 'getCities'
         })
     },
     methods: {
@@ -21,7 +22,8 @@ export default {
             userRegister: 'userRegister',
             userLogin: 'userLogin',
             fetchUserInfo: 'fetchUserInfo',
-            resetUserInfo: 'resetUserInfo'
+            resetUserInfo: 'resetUserInfo',
+            fetchCities: 'fetchCities'
          
         })
     },
