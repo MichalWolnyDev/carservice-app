@@ -7,10 +7,14 @@
         <div class="search__row">
           <div class="search__item">
             <CustomSelect
+              v-if="getCities"
               :options="getCities"
               :default="'Wybierz miasto'"
               class="select"
-              @input="chooseOption($event); console.log($event)"
+              @input="
+                chooseOption($event);
+                console.log($event);
+              "
             />
           </div>
         </div>

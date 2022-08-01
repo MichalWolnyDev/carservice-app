@@ -8,7 +8,7 @@ const BASE_URL = process.env.VUE_APP_BASEURL
 
 export default {
     state: {
-        chosenGarage: []
+        cities: []
     },
     getters: {
         getCities(state) {

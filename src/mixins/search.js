@@ -11,7 +11,7 @@ export default {
             getGarages: 'getGarages',
             getChosenGarage: 'getChosenGarage',
             getToken: 'getToken',
-            getUserToken: 'getUserToken',
+            // getUserToken: 'getUserToken',
             getUserInfo: 'getUserInfo',
             getCities: 'getCities'
         })
