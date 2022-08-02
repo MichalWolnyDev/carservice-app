@@ -8,6 +8,7 @@ import register from './modules/register'
 import login from './modules/login'
 import user from './modules/user'
 import cities from './modules/cities'
+import dictionary from './modules/dictionary'
 
 
 const store = new Vuex.Store({
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     register,
     login,
     user,
-    cities
+    cities,
+    dictionary
   }
 })
 

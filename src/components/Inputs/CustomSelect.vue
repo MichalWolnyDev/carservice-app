@@ -1,19 +1,28 @@
 <template>
-  <div class="select" :tabindex="tabindex" @blur="open = false">
-    <div class="select__selected" :class="{ open: open }" @click="open = !open">
-      {{ selected }}
-    </div>
-    <div class="select__items" :class="{ selectHide: !open }">
+  <div class="select__wrap">
+    <label class="select__label">
+      <slot></slot>
+    </label>
+    <div class="select" :tabindex="tabindex" @blur="open = false">
       <div
-        v-for="(option, i) of options"
-        :key="i"
-        @click="
-          selected = option;
-          open = false;
-          $emit('input', option);
-        "
+        class="select__selected"
+        :class="{ open: open }"
+        @click="open = !open"
       >
-        {{ option.name }}
+        {{ selected.name }}
+      </div>
+      <div class="select__items" :class="{ selectHide: !open }">
+        <div
+          v-for="(option, i) of options"
+          :key="i"
+          @click="
+            selected = option;
+            open = false;
+            $emit('input', option);
+          "
+        >
+          {{ option.name }}
+        </div>
       </div>
     </div>
   </div>
@@ -58,20 +67,26 @@ export default {
   width: 100%;
   text-align: left;
   outline: none;
-  height: 47px;
-  line-height: 47px;
+  // height: 40.4px;
+  font-size: 14px;
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+  }
 
   &__selected {
     background-color: #fff;
-    border-radius: 6px;
-    border: 1px solid rgba(141, 141, 141, 0.2);
     color: #000;
     padding-left: 1em;
     cursor: pointer;
     user-select: none;
-    -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 1);
-    box-shadow: 0px 0px 20px -10px rgba(0,0,0,1);
+    height: 40.4px;
+
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    padding: 0.6rem;
 
     &.open {
       border: 1px solid rgba(141, 141, 141, 0.2);
@@ -81,7 +96,7 @@ export default {
     &:after {
       position: absolute;
       content: "";
-      top: 22px;
+      top: 18px;
       right: 1em;
       width: 0;
       height: 0;
@@ -109,12 +124,17 @@ export default {
       padding-left: 1em;
       cursor: pointer;
       user-select: none;
+      line-height: 40.4px;
 
       &:hover {
         background-color: $blueActive;
         color: #fff;
       }
     }
+  }
+  &__label {
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 }
 .selectHide {
