@@ -23,7 +23,8 @@ export default {
             userLogin: 'userLogin',
             fetchUserInfo: 'fetchUserInfo',
             resetUserInfo: 'resetUserInfo',
-            fetchCities: 'fetchCities'
+            fetchCities: 'fetchCities',
+            setParam: 'setParam'
          
         })
     },

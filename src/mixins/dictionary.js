@@ -11,7 +11,8 @@ export default {
             getGearbox: 'getGearbox',
             getBodyType: 'getBodyType',
             getBrands: 'getBrands',
-            getModels: 'getModels'
+            getModels: 'getModels',
+            getServices: 'getServices'
          
         })
     },

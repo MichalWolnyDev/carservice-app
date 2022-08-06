@@ -9,7 +9,11 @@ const BASE_URL = process.env.VUE_APP_BASEURL
 export default {
   state: {
     garages: [],
-    chosenGarage: []
+    chosenGarage: [],
+    params: {
+      page: 0,
+      size: 20
+    }
   },
   getters: {
     getGarages(state) {
@@ -26,12 +30,16 @@ export default {
     setChosenGarage(state, data) {
       state.chosenGarage = data;
     },
+    setParams(state, data) {
+      state.params = data;
+    },
 
   },
   actions: {
-    async fetchGarages({ commit }) {
-      console.log(BASE_URL)
+    async fetchGarages({ commit, state }) {
       await axios.get(BASE_URL + '/garages', {
+        params: state.params
+      }, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -46,6 +54,21 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    setParam({ commit, state }, param){
+
+      if(param.key == "serviceId"){
+       param.value = param.value.join(',');
+      }
+
+      var tempParams = {
+        ...state.params,
+        [param.key]: param.value
+      }
+
+
+
+      commit("setParams", tempParams)
     },
     chooseGarage({ commit }, data) {
       commit("setChosenGarage", data)

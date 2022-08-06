@@ -7,13 +7,16 @@
         <div class="search__row">
           <div class="search__item">
             <CustomSelect
-              v-if="getCities"
-              :options="getCities"
+              v-if="getCities.content"
+              :options="getCities.content"
               :default="'Wybierz miasto'"
               class="select"
               @input="
                 chooseOption($event);
-                console.log($event);
+                setParam({
+                  key: 'cityId',
+                  value: $event.id,
+                });
               "
             />
           </div>
@@ -23,12 +26,13 @@
             <h3 class="services__title">Zakres usług</h3>
             <div class="services__wrap">
               <Checkbox
-                v-for="(service, index) in services"
+                v-for="service in getServices"
                 :label="service.label"
-                :inputVal="service.val"
-                :key="index"
+                :inputVal="service.id"
+                :key="service.id"
                 class="services__item"
                 v-model="selectedServices"
+                @change="setParam({})"
               />
             </div>
             <!-- <ul>
@@ -40,12 +44,12 @@
         </div>
       </div>
       <div class="search__button">
-        <Button> Wyszukaj </Button>
+        <Button @click.native.prevent="fetchGarages"> Wyszukaj </Button>
       </div>
     </div>
     <div>
       <div class="listing" v-if="showListing">
-        <div class="" v-for="(garage, id) in getGarages" :key="id">
+        <div class="" v-for="(garage, id) in getGarages.content" :key="id">
           <ListingItem :garage="garage" @openModal="showModal = true" />
         </div>
       </div>
@@ -72,9 +76,10 @@ import Loader from "@/components/Loader.vue";
 import Modal from "@/components/Modal";
 
 import search from "@/mixins/search";
+import dictionary from "@/mixins/dictionary";
 
 export default {
-  mixins: [search],
+  mixins: [search, dictionary],
   components: {
     CustomSelect,
     Button,
@@ -92,42 +97,20 @@ export default {
       searchData: {
         localization: "",
       },
-      services: [
-        {
-          label: "Wymiana oleju i filtra oleju",
-          val: "Wymiana oleju i filtra oleju",
-        },
-        {
-          label: "Wymiana akumulatora",
-          val: "Wymiana akumulatora",
-        },
-        {
-          label: "Wymiana opon i wulkanizacja",
-          val: "Wymiana opon i wulkanizacja",
-        },
-        {
-          label: "Wymiana klocków hamulcowych",
-          val: "Wymiana klocków hamulcowych",
-        },
-        {
-          label: "Diagnostyka komputerowa",
-          val: "Diagnostyka komputerowa",
-        },
-        {
-          label: "Serwis klimatyzacji",
-          val: "Serwis klimatyzacji",
-        },
-        {
-          label: "Sprawdzenie samochodu przed zakupem",
-          val: "Sprawdzenie samochodu przed zakupem",
-        },
-        {
-          label: "Poprawki lakiernicze",
-          val: "Poprawki lakiernicze",
-        },
-      ],
+
       selectedServices: [],
     };
+  },
+  watch: {
+    selectedServices: {
+      handler() {
+          this.setParam({
+          key: "serviceId",
+          value: this.selectedServices,
+        });
+      },
+      deep: true,
+    },
   },
   methods: {
     chooseOption(e) {

@@ -26,7 +26,7 @@ export default {
             await axios.get(BASE_URL + '/cities', {
                 params: {
                     page: 0,
-                    size: 200
+                    size: 2000
                 }
             }, {
                 headers: {
