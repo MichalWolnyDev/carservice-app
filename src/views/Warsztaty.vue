@@ -44,14 +44,19 @@
         </div>
       </div>
       <div class="search__button">
-        <Button @click.native.prevent="fetchGarages"> Wyszukaj </Button>
+        <Button @click.native.prevent="fetchGarages(); activateLoader()"> Wyszukaj </Button>
       </div>
     </div>
     <div>
-      <div class="listing" v-if="showListing">
+      <div class="listing" v-if="getGarages.content && showLoader == false">
         <div class="" v-for="(garage, id) in getGarages.content" :key="id">
           <ListingItem :garage="garage" @openModal="showModal = true" />
         </div>
+      </div>
+      <div v-if="getGarages.content && getGarages.content.length == 0">
+        <p>
+          Brak warsztatów o podanych kryteriach
+        </p>
       </div>
       <div v-if="showLoader">
         <Loader />
@@ -92,7 +97,7 @@ export default {
   data() {
     return {
       showListing: true,
-      showLoader: true,
+      showLoader: false,
       showModal: false,
       searchData: {
         localization: "",
@@ -117,10 +122,19 @@ export default {
       console.log(e);
       this.searchData.localization = e;
     },
+    activateLoader() {
+      var _this = this;
+      
+      this.showLoader = true;
+
+      setTimeout(() => {
+        _this.showLoader = false
+      }, 1000)
+    }
   },
   mounted() {
     this.fetchCities();
-    this.fetchGarages();
+    // this.fetchGarages();
   },
 };
 </script>

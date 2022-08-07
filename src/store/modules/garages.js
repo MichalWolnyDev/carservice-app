@@ -57,16 +57,10 @@ export default {
     },
     setParam({ commit, state }, param){
 
-      if(param.key == "serviceId"){
-       param.value = param.value.join(',');
-      }
-
       var tempParams = {
         ...state.params,
         [param.key]: param.value
       }
-
-
 
       commit("setParams", tempParams)
     },
