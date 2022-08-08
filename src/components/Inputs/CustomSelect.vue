@@ -5,12 +5,22 @@
     </label>
     <div class="select" :tabindex="tabindex" @blur="open = false">
       <div
+        v-if="!textMode"
         class="select__selected"
         :class="{ open: open }"
         @click="open = !open"
       >
         {{ selected.name }}
       </div>
+      <input
+        type="text"
+        class="select__selected"
+        @input="handleInput"
+        @click="open = !open"
+        :placeholder="selected.name"
+        v-model="textToFilter"
+        v-else
+      />
       <div class="select__items" :class="{ selectHide: !open }">
         <div
           v-for="(option, i) of options"
@@ -18,6 +28,7 @@
           @click="
             selected = option;
             open = false;
+            textToFilter = '';
             $emit('input', option);
           "
         >
@@ -45,6 +56,10 @@ export default {
       required: false,
       default: 0,
     },
+    textMode: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -54,7 +69,23 @@ export default {
         ? this.options[0]
         : null,
       open: false,
+      textToFilter: "",
     };
+  },
+  methods: {
+    handleInput(e) {
+      this.open = true;
+      console.log(e.target.value);
+      if (e.target.value.length == 0) {
+        this.textToFilter = "";
+      }
+      this.$emit("typetext", e.target.value);
+    },
+  },
+  computed: {
+    inputPlaceholder() {
+      return this.selected.name != "" ? this.selected.name : "";
+    },
   },
   mounted() {
     // this.$emit("input", this.selected);
@@ -83,6 +114,7 @@ export default {
     cursor: pointer;
     user-select: none;
     height: 40.4px;
+    width: 100%;
 
     border: 1px solid #cecece;
     border-radius: 5px;
@@ -102,6 +134,22 @@ export default {
       height: 0;
       border: 5px solid transparent;
       border-color: #000 transparent transparent transparent;
+    }
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #000;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #000;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #000;
     }
   }
   &__items {

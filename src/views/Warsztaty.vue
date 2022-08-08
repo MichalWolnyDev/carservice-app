@@ -8,7 +8,10 @@
           <div class="search__item">
             <CustomSelect
               v-if="getCities.content"
-              :options="getCities.content"
+              :textMode="true"
+              :options="
+                filteredCities.length == 0 ? getCities.content : filteredCities
+              "
               :default="'Wybierz miasto'"
               class="select"
               @input="
@@ -18,6 +21,7 @@
                   value: $event.id,
                 });
               "
+              @typetext="filterGarages($event)"
             />
           </div>
         </div>
@@ -44,7 +48,14 @@
         </div>
       </div>
       <div class="search__button">
-        <Button @click.native.prevent="fetchGarages(); activateLoader()"> Wyszukaj </Button>
+        <Button
+          @click.native.prevent="
+            fetchGarages();
+            activateLoader();
+          "
+        >
+          Wyszukaj
+        </Button>
       </div>
     </div>
     <div>
@@ -54,9 +65,7 @@
         </div>
       </div>
       <div v-if="getGarages.content && getGarages.content.length == 0">
-        <p>
-          Brak warsztatów o podanych kryteriach
-        </p>
+        <p class="search__response">Brak warsztatów o podanych kryteriach</p>
       </div>
       <div v-if="showLoader">
         <Loader />
@@ -104,12 +113,13 @@ export default {
       },
 
       selectedServices: [],
+      filteredCities: [],
     };
   },
   watch: {
     selectedServices: {
       handler() {
-          this.setParam({
+        this.setParam({
           key: "serviceId",
           value: this.selectedServices,
         });
@@ -117,22 +127,30 @@ export default {
       deep: true,
     },
   },
+  computed: {},
   methods: {
+    filterGarages(text) {
+      text = text.toLowerCase();
+      this.filteredCities = this.getCities.content.filter((e) =>
+        e.name.toLowerCase().includes(text)
+      );
+    },
     chooseOption(e) {
       console.log(e);
       this.searchData.localization = e;
     },
     activateLoader() {
       var _this = this;
-      
+
       this.showLoader = true;
 
       setTimeout(() => {
-        _this.showLoader = false
-      }, 1000)
-    }
+        _this.showLoader = false;
+      }, 1000);
+    },
   },
   mounted() {
+    // this.resetParams();
     this.fetchCities();
     // this.fetchGarages();
   },
@@ -166,6 +184,13 @@ export default {
     display: flex;
     justify-content: center;
     margin: 20px;
+  }
+
+  &__response {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
   }
 }
 

@@ -24,7 +24,8 @@ export default {
             fetchUserInfo: 'fetchUserInfo',
             resetUserInfo: 'resetUserInfo',
             fetchCities: 'fetchCities',
-            setParam: 'setParam'
+            setParam: 'setParam',
+            resetParams: 'resetParams'
          
         })
     },

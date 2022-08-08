@@ -13,6 +13,10 @@ export default {
     params: {
       page: 0,
       size: 20
+    },
+    defaultParams: {
+      page: 0,
+      size: 20
     }
   },
   getters: {
@@ -63,6 +67,9 @@ export default {
       }
 
       commit("setParams", tempParams)
+    },
+    resetParams({commit, state}) {
+      commit("setParams", state.defaultParams)
     },
     chooseGarage({ commit }, data) {
       commit("setChosenGarage", data)
