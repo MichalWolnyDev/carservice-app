@@ -12,7 +12,8 @@ export default {
             getBodyType: 'getBodyType',
             getBrands: 'getBrands',
             getModels: 'getModels',
-            getServices: 'getServices'
+            getServices: 'getServices',
+            getEngine: 'getEngine'
          
         })
     },

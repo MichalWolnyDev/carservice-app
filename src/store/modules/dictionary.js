@@ -11,6 +11,40 @@ export default {
     state: {
         brands: [],
         models: [],
+        engine: [
+            {
+                name: 'Benzyna',
+                value: 0
+            },
+            {
+                name: 'Benzyna+CNG',
+                value: 1
+            },
+            {
+                name: 'Benzyna+LPG',
+                value: 2
+            },
+            {
+                name: 'Diesel',
+                value: 3
+            },
+            {
+                name: 'Elektryczny',
+                value: 4
+            },
+            {
+                name: 'Etanol',
+                value: 5
+            },
+            {
+                name: 'Hybryda',
+                value: 6
+            },
+            {
+                name: 'Wodór',
+                value: 7
+            },
+        ],
         gearbox: [
             {
                 name: 'automatyczna',
@@ -114,6 +148,9 @@ export default {
         },
         getServices(state) {
             return state.services;
+        },
+        getEngine(state) {
+            return state.engine;
         },
 
     },
