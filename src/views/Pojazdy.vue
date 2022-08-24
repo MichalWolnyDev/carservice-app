@@ -5,7 +5,7 @@
       <div class="cars__top">
         <Button :green="true" @click.native.prevent="showModal = true"> Dodaj samochód </Button>
       </div>
-      <ListingCars />
+      <ListingCars v-for="car in getUserCars" :key="car.id" :car="car" />
     </div>
     <Modal
       v-if="showModal"
@@ -22,7 +22,10 @@ import CarForm from "@/components/Forms/CarForm.vue";
 import Button from "@/components/Inputs/Button.vue";
 import Modal from "@/components/Modal";
 
+import search from "@/mixins/search";
+
 export default {
+  mixins: [search],
   components: {
     ListingCars,
     Button,
@@ -33,6 +36,9 @@ export default {
     return {
       showModal: false
     }
+  },
+  mounted(){
+    this.fetchUserCars()
   }
 };
 </script>

@@ -6,14 +6,15 @@ export default {
         }
     },
     computed: {
-        ...mapState(['garages','register','login', 'user', 'cities']),
+        ...mapState(['garages','register','login', 'user', 'cities','userCars']),
         ...mapGetters({
             getGarages: 'getGarages',
             getChosenGarage: 'getChosenGarage',
             getToken: 'getToken',
             // getUserToken: 'getUserToken',
             getUserInfo: 'getUserInfo',
-            getCities: 'getCities'
+            getCities: 'getCities',
+            getUserCars: 'getUserCars'
         })
     },
     methods: {
@@ -25,7 +26,8 @@ export default {
             resetUserInfo: 'resetUserInfo',
             fetchCities: 'fetchCities',
             setParam: 'setParam',
-            resetParams: 'resetParams'
+            resetParams: 'resetParams',
+            fetchUserCars: 'fetchUserCars'
          
         })
     },

@@ -1,48 +1,49 @@
 <template>
-  <div class="listingCars shadow">
-    <p class="listingCars__title">Volkswagen Passat</p>
+  <div class="listingCars shadow" v-if="car">
+    <p class="listingCars__title">{{car.model.make.name}} {{car.model.name}}</p>
 
     <div class="listingCars__wrap">
       <div class="listingCars__col">
         <table class="listingCars__table">
           <tr>
             <th>Marka:</th>
-            <td>Volkswagen</td>
+            <td>{{car.model.make.name}}</td>
           </tr>
           <tr>
             <th>Model:</th>
-            <td>Passat</td>
+            <td>{{car.model.name}}</td>
           </tr>
           <tr>
             <th>Numer rejestracyjny:</th>
-            <td>PZ2137</td>
+            <td>{{car.registrationNumber}}</td>
           </tr>
           <tr>
-            <th>Silnik:</th>
-            <td>2.0 8V</td>
-          </tr>
-          <tr>
-            <th>Moc silnika:</th>
-            <td>130 KM</td>
+            <th>Rodzaj silnika:</th>
+            <td>{{car.engine}}</td>
           </tr>
           <tr>
             <th>Rodzaj skrzyni biegów:</th>
-            <td>Manualna</td>
+            <td>{{car.gearbox}}</td>
           </tr>
           <tr>
             <th>Rok produkcji:</th>
-            <td>1998</td>
+            <td>{{car.year}}</td>
           </tr>
           <tr>
             <th>Typ nadwozia:</th>
-            <td>Sedan</td>
+            <td>{{car.bodyType}}</td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'ListingCars',
+  props: ['car']
+}
+</script>
 <style lang="scss">
 .listingCars {
   padding: 20px;

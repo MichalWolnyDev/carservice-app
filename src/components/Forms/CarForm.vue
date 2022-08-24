@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="carform">
+    <div v-if="!carAdded">
+      <div class="carform" >
       <div class="carform__wrap">
         <div class="carform__item">
           <CustomSelect
@@ -20,7 +21,7 @@
             :options="getModels"
             :default="'wybierz'"
             class="select"
-            @input="form.model = $event"
+            @input="form.model = $event.id"
           >
             <template> Model </template>
           </CustomSelect>
@@ -40,11 +41,11 @@
             <template> Jednostka napędowa </template>
           </CustomSelect>
         </div>
-        <div class="carform__item">
+        <!-- <div class="carform__item">
           <Input v-model="form.power">
             <template> Moc (KM) </template>
           </Input>
-        </div>
+        </div> -->
         <div class="carform__item">
           <CustomSelect
             :options="getGearbox"
@@ -78,6 +79,14 @@
               Dodaj
             </Button> -->
     </div>
+    </div>
+    <div v-else>
+      <div class="carform__success">
+        <h3>
+          Samochód został dodany poprawnie!
+        </h3>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -100,14 +109,15 @@ export default {
     return {
       form: {
         brand: "",
-        model: "",
+        model: null,
         registerNumber: "",
         engine: "",
-        power: "",
+        // power: "",
         gearbox: "",
         prodYear: null,
         body: "",
       },
+      carAdded: false
     };
   },
   methods: {
@@ -119,13 +129,12 @@ export default {
         .post(
           BASE_URL + "/cars",
           {
-            model: this.form.model,
+            modelId: this.form.model,
             registrationNumber: this.form.registerNumber,
             year: Number(this.form.prodYear),
             engine: this.form.engine,
             gearbox: this.form.gearbox,
             bodyType: this.form.body,
-            owner: this.getUserInfo,
           },
           {
             headers: { Authorization: `Bearer ${token}` }
@@ -133,6 +142,10 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          if(res.status == 200) {
+            this.carAdded = true
+            this.fetchUserCars();
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -174,6 +187,15 @@ export default {
 
   .select__items {
     max-height: 150px;
+  }
+
+  &__success {
+    text-align: center;
+
+    h3 {
+      font-size: 1.5rem;
+      color: $green;
+    }
   }
 }
 </style>
