@@ -34,14 +34,21 @@
             <td>{{car.bodyType}}</td>
           </tr>
         </table>
+        <br>
+        <Button :red="true" >Usuń pojazd</Button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Button from "@/components/Inputs/Button.vue";
+
 export default {
   name: 'ListingCars',
-  props: ['car']
+  props: ['car'],
+  components: {
+    Button,
+  }
 }
 </script>
 <style lang="scss">
