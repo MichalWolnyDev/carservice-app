@@ -152,6 +152,8 @@ export default {
   mounted() {
     // this.resetParams();
     this.fetchCities();
+    this.fetchUserCars();
+
     // this.fetchGarages();
   },
 };

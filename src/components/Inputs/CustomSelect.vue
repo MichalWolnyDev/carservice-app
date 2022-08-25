@@ -10,8 +10,14 @@
         :class="{ open: open }"
         @click="open = !open"
       >
-        {{ selected.name }}
+        <template v-if="reservationForm && selected.make">
+          {{ selected.make.name }} {{ selected.name }}
+        </template>
+        <template v-else>
+          {{ selected.name }}
+        </template>
       </div>
+
       <input
         type="text"
         class="select__selected"
@@ -32,7 +38,12 @@
             $emit('input', option);
           "
         >
-          {{ option.name }}
+          <template v-if="reservationForm">
+            {{ option.make.name }} {{ option.name }}
+          </template>
+          <template v-else>
+            {{ option.name }}
+          </template>
         </div>
       </div>
     </div>
@@ -57,6 +68,10 @@ export default {
       default: 0,
     },
     textMode: {
+      type: Boolean,
+      default: false,
+    },
+    reservationForm: {
       type: Boolean,
       default: false,
     },

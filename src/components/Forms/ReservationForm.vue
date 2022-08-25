@@ -12,7 +12,7 @@
           {{ getChosenGarage.address }}, {{ getChosenGarage.postCode }}
           {{ getChosenGarage.city.name }}
         </p>
-        <br>
+        <br />
         <p>
           <strong> Godziny otwarcia: </strong>
         </p>
@@ -20,16 +20,22 @@
         <p>Sobota: {{ getChosenGarage.hoursSaturday }}</p>
         <p>Niedziela: {{ getChosenGarage.horusSunday }}</p>
       </div>
-      <div class="reservation__step">
+      <div class="reservation__step" v-if="getUserCars.length > 0">
         <p class="reservation__step-title">1. Wybierz swój pojazd</p>
         <div class="reservation__car">
           <CustomSelect
-            :options="exampleCars"
+            :options="tempUserCars"
+            :reservationForm="true"
             :default="'Wybierz pojazd'"
             class="select"
             @input="chooseOption($event)"
           />
         </div>
+      </div>
+      <div class="reservation__step" v-else>
+        <p class="reservation__step-title">
+          Nie posiadasz dodanych samochodów na swoim koncie
+        </p>
       </div>
       <transition name="fade">
         <div class="reservation__step" v-if="showSteps.step2">
@@ -83,12 +89,7 @@ export default {
   },
   data() {
     return {
-      exampleCars: [{
-        name: "Mazda"
-      },
-      {
-        name: "Opel"
-      }],
+      tempUserCars: [],
       selectedCar: "",
       selectedDate: "",
       reservationMsg: "",
@@ -107,6 +108,9 @@ export default {
       console.log(e);
       this.selectedCar = e;
     },
+    userCarsSelect() {
+      return this.getUserCars.filter((e) => this.tempUserCars.push(e.model));
+    },
   },
   watch: {
     selectedCar: {
@@ -118,11 +122,18 @@ export default {
       deep: true,
     },
   },
+  mounted() {
+    var _this = this;
+
+    setTimeout(() => {
+      _this.userCarsSelect();
+    }, 1500);
+  },
 };
 </script>
 <style lang="scss">
 .reservation {
-  &__garage{
+  &__garage {
     padding-bottom: 2rem;
   }
   &__wrap {
