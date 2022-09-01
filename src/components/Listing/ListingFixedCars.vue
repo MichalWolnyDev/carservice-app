@@ -2,26 +2,33 @@
   <div>
     <h2 class="title title__h2 text__center">Status naprawy</h2>
     <div class="listingItemFixedCars shadow">
-      <p class="listingItemFixedCars__title">Volkswagen Passat</p>
+      <p class="listingItemFixedCars__title">
+        {{ booking.car.model.make.name }} {{ booking.car.model.name }}
+      </p>
 
       <div class="listingItemFixedCars__wrap">
         <div class="listingItemFixedCars__col">
-          <p class="listingItemFixedCars__text">AutoMech Mechanik</p>
-          <p class="listingItemFixedCars__text">wielkopolskie</p>
+          <p class="listingItemFixedCars__text">{{ booking.garage.name }}</p>
           <p class="listingItemFixedCars__text">
-            ul. Kolorowa 20/2 60-001 Poznań
+            {{ booking.garage.city.province }}
+          </p>
+          <p class="listingItemFixedCars__text">
+            {{ booking.garage.address }}, {{ booking.garage.postCode }}
+            {{ booking.garage.city.name }}
           </p>
           <p class="listingItemFixedCars__text">
             Godziny otwarcia: <br />
-            Pn - Pt: 8:00 - 18:00 <br />
-            Sobota: 10:00 - 18:00 <br />
-            Niedziela: nieczynne
+            Pn - Pt: {{ booking.garage.hoursWeek }} <br />
+            Sobota: {{ booking.garage.hoursSaturday }} <br />
+            Niedziela: {{ booking.garage.horusSunday }}
           </p>
           <br>
+          <p class="listingItemFixedCars__text">
+            Data wizyty: {{ booking.date }}
+          </p>
+          <br />
           <Button :arrow="true" :green="true" @click.native="show = !show">
-            <span>
-              SPRAWDŹ STATUS NAPRAWY
-            </span>
+            <span> SPRAWDŹ STATUS NAPRAWY </span>
             <img :src="arrow_down" alt="SPRAWDŹ STATUS NAPRAWY" />
           </Button>
 
@@ -103,6 +110,7 @@
 import arrow_down from "/src/assets/arrow_down.svg";
 import Button from "@/components/Inputs/Button.vue";
 export default {
+  props: ["booking"],
   components: {
     Button,
   },

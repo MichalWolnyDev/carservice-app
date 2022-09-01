@@ -10,6 +10,7 @@ import user from './modules/user'
 import cities from './modules/cities'
 import dictionary from './modules/dictionary'
 import userCars from './modules/userCars'
+import userBookings from './modules/userBookings'
 
 
 const store = new Vuex.Store({
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
     user,
     cities,
     dictionary,
-    userCars
+    userCars,
+    userBookings
   }
 })
 

@@ -1,6 +1,6 @@
 <template>
   <div class="reservation">
-    <div class="reservation__wrap">
+    <div class="reservation__wrap" v-if="!success">
       <div class="reservation__garage">
         <p>
           <strong> Wybrany serwis: </strong>
@@ -46,9 +46,9 @@
             <vc-date-picker
               :min-date="new Date()"
               v-model="selectedDate"
-              :model-config="modelConfig"
+            :model-config="modelConfig"
+
             ></vc-date-picker>
-            {{ selectedDate }}
           </div>
         </div>
       </transition>
@@ -65,12 +65,17 @@
             ></textarea>
           </div>
           <div class="reservation__button">
-            <Button :green="true" @click.native="$emit('openModal', true)">
-              Wyślij
-            </Button>
+            <!-- @click.native="$emit('openModal', true)" -->
+            <Button :green="true" @click.native="addBooking"> Wyślij </Button>
+          </div>
+          <div class="reservation__error-wrap" v-if="error">
+            <p class="reservation__error">Wybierz proponowaną datę wizyty!</p>
           </div>
         </div>
       </transition>
+    </div>
+    <div v-else>
+      <p>Dziękujemy za złożenie rezerwacji! :)</p>
     </div>
   </div>
 </template>
@@ -90,9 +95,11 @@ export default {
   data() {
     return {
       tempUserCars: [],
-      selectedCar: "",
+      selectedCar: {},
       selectedDate: "",
       reservationMsg: "",
+      error: false,
+      success: false,
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
@@ -109,7 +116,39 @@ export default {
       this.selectedCar = e;
     },
     userCarsSelect() {
-      return this.getUserCars.filter((e) => this.tempUserCars.push(e.model));
+      return this.getUserCars.filter((e) => this.tempUserCars.push({model: e.model, id: e.id}));
+    },
+    async addBooking() {
+      const BASE_URL = process.env.VUE_APP_BASEURL;
+      let token = localStorage.getItem("token");
+
+      if (this.selectedDate != "" && this.selectedCar != "") {
+        this.error = false;
+        await this.$axios
+          .post(
+            BASE_URL + "/bookings",
+            {
+              date: this.selectedDate,
+              message: this.reservationMsg,
+              carId: this.selectedCar.id,
+              garageId: this.getChosenGarage.id,
+            },
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            if (res.status == 200) {
+              this.success = true;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        this.error = true;
+      }
     },
   },
   watch: {
@@ -161,6 +200,10 @@ export default {
   &__button {
     text-align: center;
     padding: 30px 0;
+  }
+  &__error {
+    color: $redError;
+    text-align: center;
   }
 }
 

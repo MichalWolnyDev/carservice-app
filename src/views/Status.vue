@@ -1,25 +1,32 @@
 <template>
   <div>
-   <ListingFixedCars  />
+    <ListingFixedCars v-for="booking in getUserBookings" :key="booking.id" :booking="booking"/>
   </div>
 </template>
 <script>
-  import ListingFixedCars from "@/components/Listing/ListingFixedCars.vue";
-  export default {
+import ListingFixedCars from "@/components/Listing/ListingFixedCars.vue";
+
+import search from "@/mixins/search";
+
+export default {
+  mixins: [search],
   components: {
-    ListingFixedCars
+    ListingFixedCars,
+  },
+   mounted(){
+    this.fetchUserBookings()
   }
-  }
+};
 </script>
 <style lang="scss">
-.status{
-    &__message{
-        margin: 30px 0;
+.status {
+  &__message {
+    margin: 30px 0;
 
-        &-text{
-            font-size: 20px;
-        }
+    &-text {
+      font-size: 20px;
     }
+  }
 }
 .steps {
   margin: 50px 0;
@@ -56,9 +63,8 @@
       }
     }
 
-
-    @media(max-width: 320px){
-        padding-bottom: 20px;
+    @media (max-width: 320px) {
+      padding-bottom: 20px;
     }
   }
 

@@ -10,8 +10,8 @@
         :class="{ open: open }"
         @click="open = !open"
       >
-        <template v-if="reservationForm && selected.make">
-          {{ selected.make.name }} {{ selected.name }}
+        <template v-if="reservationForm && selected.model">
+          {{ selected.model.make.name }} {{ selected.model.name }}
         </template>
         <template v-else>
           {{ selected.name }}
@@ -39,7 +39,7 @@
           "
         >
           <template v-if="reservationForm">
-            {{ option.make.name }} {{ option.name }}
+            {{ option.model.make.name }} {{ option.model.name }}
           </template>
           <template v-else>
             {{ option.name }}
