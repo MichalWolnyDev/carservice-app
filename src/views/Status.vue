@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2 class="title title__h2 text__center">Status naprawy</h2>
+
     <ListingFixedCars v-for="booking in getUserBookings" :key="booking.id" :booking="booking"/>
   </div>
 </template>

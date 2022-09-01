@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2 class="title title__h2 text__center">Status naprawy</h2>
     <div class="listingItemFixedCars shadow">
       <p class="listingItemFixedCars__title">
         {{ booking.car.model.make.name }} {{ booking.car.model.name }}
