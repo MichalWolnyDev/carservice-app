@@ -25,6 +25,18 @@
         <router-link to="/status">
           <div class="menu__item">Status naprawy</div>
         </router-link>
+        <router-link to="/warsztat">
+          <div class="menu__item">Mój warsztat (dla właściciela)</div>
+        </router-link>
+        <router-link to="/dodajwarsztat">
+          <div class="menu__item">Dodaj warsztat (dla właściciela)</div>
+        </router-link>
+        <router-link to="/mechanicy">
+          <div class="menu__item">Mechanicy (dla właściciela)</div>
+        </router-link>
+        <router-link to="/dodajmechanika">
+          <div class="menu__item">Dodaj mechaników (dla właściciela)</div>
+        </router-link>
         <div class="menu__item menu__item-bottom" @click="logout">Wyloguj</div>
       </div>
     </div>

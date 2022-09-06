@@ -43,6 +43,26 @@ const routes = [
         path: '/pojazdy',
         name: 'Moje pojazdy',
         component: () => import(/* webpackChunkName: "status" */ '../views/Pojazdy.vue')
+      },
+      {
+        path: '/warsztat',
+        name: 'Mój warsztat',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Warsztat.vue')
+      },
+      {
+        path: '/dodajwarsztat',
+        name: 'Dodaj warsztat',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Dodajwarsztat.vue')
+      },
+      {
+        path: '/mechanicy',
+        name: 'Mechanicy',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Mechanicy.vue')
+      },
+      {
+        path: '/dodajmechanika',
+        name: 'Dodaj mechaników',
+        component: () => import(/* webpackChunkName: "status" */ '../views/Dodajmechanika.vue')
       }
     ]
   }
