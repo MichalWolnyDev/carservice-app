@@ -13,7 +13,8 @@ export default {
             getBrands: 'getBrands',
             getModels: 'getModels',
             getServices: 'getServices',
-            getEngine: 'getEngine'
+            getEngine: 'getEngine',
+            getRoles: 'getRoles'
          
         })
     },

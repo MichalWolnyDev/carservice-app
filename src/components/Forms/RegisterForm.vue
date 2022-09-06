@@ -89,9 +89,10 @@ import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import search from "@/mixins/search";
+import dictionary from "@/mixins/dictionary";
 import Loader from "@/components/Inputs/Loader.vue";
 export default {
-  mixins: [search],
+  mixins: [search, dictionary],
   components: {
     Input,
     Button,
@@ -99,7 +100,6 @@ export default {
   },
   data() {
     return {
-     
       formData: {
         firstName: "",
         surname: "",

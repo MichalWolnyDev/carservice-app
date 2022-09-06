@@ -85,6 +85,17 @@ export default {
                 value: 6
             },
         ],
+        roles: [
+            {
+                name: "USER",
+            },
+            {
+                name: "OWNER",
+            },
+            {
+                name: "MECHANIC",
+            },
+        ],
         services: [
             {
                 id: 1,
@@ -152,6 +163,9 @@ export default {
         getEngine(state) {
             return state.engine;
         },
+        getRoles(state) {
+            return state.roles;
+        }
 
     },
     mutations: {
