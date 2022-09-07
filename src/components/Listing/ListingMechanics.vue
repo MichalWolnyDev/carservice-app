@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <th>Numer telefonu:</th>
-            <td>213769420</td>
+            <td>213769420 </td>
           </tr>
         </table>
         <br />
