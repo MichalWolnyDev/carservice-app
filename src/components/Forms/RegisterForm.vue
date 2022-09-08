@@ -64,6 +64,14 @@
         >
           <template> Powtórz hasło </template>
         </Input>
+        <CustomSelect
+            :options="getRoles"
+            :default="'wybierz'"
+            class="select"
+            @input="form.roles = $event.name"
+          >
+           
+          </CustomSelect>
         <p
           class="loginform__input-error"
           v-if="!$v.formData.confirmPassword.sameAsPassword"
@@ -90,6 +98,7 @@ import Button from "@/components/Inputs/Button.vue";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import search from "@/mixins/search";
 import dictionary from "@/mixins/dictionary";
+import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import Loader from "@/components/Inputs/Loader.vue";
 export default {
   mixins: [search, dictionary],
@@ -97,6 +106,7 @@ export default {
     Input,
     Button,
     Loader,
+    CustomSelect
   },
   data() {
     return {
