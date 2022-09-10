@@ -7,12 +7,15 @@
       <div
         v-if="!textMode"
         class="select__selected"
-        :class="{ open: open }"
+        :class="{ open: open, error: isError }"
         @click="open = !open"
       >
         <template v-if="reservationForm && selected.model">
           {{ selected.model.make.name }} {{ selected.model.name }}
         </template>
+         <template v-else-if="registerForm">
+            {{ selected.label }}
+          </template>
         <template v-else>
           {{ selected.name }}
         </template>
@@ -40,6 +43,9 @@
         >
           <template v-if="reservationForm">
             {{ option.model.make.name }} {{ option.model.name }}
+          </template>
+          <template v-else-if="registerForm">
+            {{ option.label }}
           </template>
           <template v-else>
             {{ option.name }}
@@ -71,7 +77,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    isError: {
+      type: Boolean,
+      default: false,
+    },
     reservationForm: {
+      type: Boolean,
+      default: false,
+    },
+    registerForm: {
       type: Boolean,
       default: false,
     },
@@ -134,6 +148,10 @@ export default {
     border: 1px solid #cecece;
     border-radius: 5px;
     padding: 0.6rem;
+
+    &.error {
+      border: 1px solid $redError;
+    }
 
     &.open {
       border: 1px solid rgba(141, 141, 141, 0.2);

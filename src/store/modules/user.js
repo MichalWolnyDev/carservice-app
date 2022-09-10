@@ -38,7 +38,7 @@ export default {
           }
         })
           .then((res) => {
-
+            localStorage.setItem('userRole', res.data.authorities[0])
             commit("setUserInfo", res.data)
           })
           .catch((err) => {

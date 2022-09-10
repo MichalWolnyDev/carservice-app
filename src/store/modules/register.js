@@ -35,7 +35,7 @@ export default {
             email: formdata.email,
             password: formdata.password,
             phone: formdata.phoneNumber,
-            role: "USER"
+            role: formdata.role
           },
           {
             headers: {

@@ -64,14 +64,6 @@
         >
           <template> Powtórz hasło </template>
         </Input>
-        <CustomSelect
-            :options="getRoles"
-            :default="'wybierz'"
-            class="select"
-            @input="form.roles = $event.name"
-          >
-           
-          </CustomSelect>
         <p
           class="loginform__input-error"
           v-if="!$v.formData.confirmPassword.sameAsPassword"
@@ -79,17 +71,41 @@
           Hasła muszą być identyczne
         </p>
       </div>
+      <div class="registerform__input">
+        <p class="input__label">Typ konta</p>
+        <CustomSelect
+          :options="getRoles"
+          :default="'wybierz'"
+          class="select"
+          :isError="roleError"
+          :registerForm="true"
+          @input="formData.role = $event.name"
+        >
+        </CustomSelect>
+        <p
+          class="loginform__input-error"
+          v-if="roleError"
+        >
+          Wybierz typ konta
+        </p>
+      </div>
       <div class="registerform__button">
-        <Button :blue="true" :big="true" v-if="!showLoader" @click.native.prevent="submitRegister">
+        <Button
+          :blue="true"
+          :big="true"
+          v-if="!showLoader"
+          @click.native.prevent="submitRegister"
+        >
           Zarejestruj
         </Button>
         <Loader v-else />
-      <p class="registerform__annotation"> 
-        <span @click="$emit('changeSignForm', 'login')">Wróć do logowania></span>
-      </p>
-    </div>
+        <p class="registerform__annotation">
+          <span @click="$emit('changeSignForm', 'login')"
+            >Wróć do logowania></span
+          >
+        </p>
       </div>
-      
+    </div>
   </div>
 </template>
 <script>
@@ -106,7 +122,7 @@ export default {
     Input,
     Button,
     Loader,
-    CustomSelect
+    CustomSelect,
   },
   data() {
     return {
@@ -117,8 +133,10 @@ export default {
         password: "",
         confirmPassword: "",
         phoneNumber: "",
-       },
-       showLoader:false,
+        role: "",
+      },
+      roleError: false,
+      showLoader: false,
     };
   },
   validations: {
@@ -130,6 +148,7 @@ export default {
       confirmPassword: {
         sameAsPassword: sameAs("password"),
       },
+      role: { required },
     },
   },
   methods: {
@@ -137,19 +156,35 @@ export default {
       var _this = this;
       this.$v.$touch();
       this.showLoader = true;
+
+      if(this.formData.role == ""){
+        this.roleError = true
+      } else{
+        this.roleError = false
+      }
+
       // if its still pending or an error is returned do not submit
-      if (this.$v.formData.$pending || this.$v.formData.$error) { 
-        this.showLoader = false 
+      if (this.$v.formData.$pending || this.$v.formData.$error ) {
+        this.showLoader = false;
         return;
       } else {
-        
         this.userRegister(this.formData);
-        setTimeout(function(){
-        _this.$emit('goToLoginForm', true)
-        }, 1500)
+        setTimeout(function () {
+          _this.$emit("goToLoginForm", true);
+        }, 1500);
       }
     },
   },
+  watch: {
+    'formData.role': {
+      handler() {
+        if(this.formData.role != ""){
+          this.roleError = false
+        }
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -178,6 +213,10 @@ export default {
     &-error {
       color: $redError;
       font-size: 0.6rem;
+      margin: 0;
+    }
+    & .select__wrap {
+      display: block;
       margin: 0;
     }
   }

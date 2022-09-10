@@ -5,38 +5,63 @@
         <Hamburger @wasClicked="mobileMenu = !mobileMenu" />
       </div>
 
-      <div class="menu__wrap" v-if="mobileMenu">
+      <div class="menu__wrap" v-if="mobileMenu && getUserInfo.authorities">
         <div class="menu__user">
           Jesteś zalogowany jako:
-          <div class="menu__user-name">{{ getUserInfo.firstName }} {{ getUserInfo.lastName }}</div>
+          <div class="menu__user-name">
+            {{ getUserInfo.firstName }} {{ getUserInfo.lastName }}
+          </div>
         </div>
-        <router-link to="/">
-          <div class="menu__item">Strona główna</div>
-        </router-link>
-        <router-link to="/profil">
-          <div class="menu__item">Mój profil</div>
-        </router-link>
-        <router-link to="/pojazdy">
-          <div class="menu__item">Moje pojazdy</div>
-        </router-link>
-        <router-link to="/warsztaty">
-          <div class="menu__item">Wyszukaj warsztat</div>
-        </router-link>
-        <router-link to="/status">
-          <div class="menu__item">Status naprawy</div>
-        </router-link>
-        <router-link to="/warsztat">
-          <div class="menu__item">Mój warsztat (dla właściciela)</div>
-        </router-link>
-        <router-link to="/dodajwarsztat">
-          <div class="menu__item">Dodaj warsztat (dla właściciela)</div>
-        </router-link>
-        <router-link to="/mechanicy">
-          <div class="menu__item">Mechanicy (dla właściciela)</div>
-        </router-link>
-        <router-link to="/dodajmechanika">
-          <div class="menu__item">Dodaj mechaników (dla właściciela)</div>
-        </router-link>
+        <div v-if="getUserInfo.authorities[0] == 'USER'">
+          <router-link to="/">
+            <div class="menu__item">Strona główna</div>
+          </router-link>
+          <router-link to="/profil">
+            <div class="menu__item">Mój profil</div>
+          </router-link>
+          <router-link to="/pojazdy">
+            <div class="menu__item">Moje pojazdy</div>
+          </router-link>
+          <router-link to="/warsztaty">
+            <div class="menu__item">Wyszukaj warsztat</div>
+          </router-link>
+          <router-link to="/status">
+            <div class="menu__item">Status naprawy</div>
+          </router-link>
+        </div>
+        <div v-if="getUserInfo.authorities[0] == 'OWNER'">
+           <router-link to="/">
+            <div class="menu__item">Strona główna</div>
+          </router-link>
+          <router-link to="/profil">
+            <div class="menu__item">Mój profil</div>
+          </router-link>
+          <router-link to="/warsztat">
+            <div class="menu__item">Mój warsztat</div>
+          </router-link>
+          <router-link to="/dodajwarsztat">
+            <div class="menu__item">Dodaj warsztat</div>
+          </router-link>
+          <router-link to="/mechanicy">
+            <div class="menu__item">Mechanicy</div>
+          </router-link>
+          <router-link to="/dodajmechanika">
+            <div class="menu__item">Dodaj mechaników</div>
+          </router-link>
+        </div>
+        <div v-if="getUserInfo.authorities[0] == 'MECHANIC'">
+           <router-link to="/">
+            <div class="menu__item">Strona główna</div>
+          </router-link>
+          <router-link to="/profil">
+            <div class="menu__item">Mój profil</div>
+          </router-link>
+          <router-link to="/zlecenia">
+            <div class="menu__item">Zlecenia</div>
+          </router-link>
+         
+        </div>
+
         <div class="menu__item menu__item-bottom" @click="logout">Wyloguj</div>
       </div>
     </div>
@@ -68,11 +93,10 @@ export default {
     },
     logout() {
       localStorage.removeItem("token");
-      this.resetUserInfo()
-        window.location.reload(true);
+      this.resetUserInfo();
+      window.location.reload(true);
 
       this.$router.push("/login");
-
     },
   },
   mounted() {

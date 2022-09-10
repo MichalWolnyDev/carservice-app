@@ -88,12 +88,15 @@ export default {
         roles: [
             {
                 name: "USER",
+                label: "Użytkownik"
             },
             {
                 name: "OWNER",
+                label: "Właściciel"
             },
             {
                 name: "MECHANIC",
+                label: "Mechanik"
             },
         ],
         services: [
