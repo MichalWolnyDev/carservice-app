@@ -48,6 +48,9 @@
           <router-link to="/dodajmechanika">
             <div class="menu__item">Dodaj mechaników</div>
           </router-link>
+           <router-link to="/zlecenia">
+            <div class="menu__item">Zlecenia</div>
+          </router-link>
         </div>
         <div v-if="getUserInfo.authorities[0] == 'MECHANIC'">
            <router-link to="/">
