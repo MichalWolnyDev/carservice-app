@@ -29,7 +29,8 @@ export default {
             setParam: 'setParam',
             resetParams: 'resetParams',
             fetchUserCars: 'fetchUserCars',
-            fetchUserBookings: 'fetchUserBookings'
+            fetchUserBookings: 'fetchUserBookings',
+            addOwnedGarage: 'addOwnedGarage'
          
         })
     },

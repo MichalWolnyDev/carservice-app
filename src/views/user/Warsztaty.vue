@@ -91,9 +91,10 @@ import Modal from "@/components/Modal";
 
 import search from "@/mixins/search";
 import dictionary from "@/mixins/dictionary";
+import helper from "@/mixins/helper";
 
 export default {
-  mixins: [search, dictionary],
+  mixins: [search, dictionary, helper],
   components: {
     CustomSelect,
     Button,
@@ -129,12 +130,6 @@ export default {
   },
   computed: {},
   methods: {
-    filterGarages(text) {
-      text = text.toLowerCase();
-      this.filteredCities = this.getCities.content.filter((e) =>
-        e.name.toLowerCase().includes(text)
-      );
-    },
     chooseOption(e) {
       console.log(e);
       this.searchData.localization = e;

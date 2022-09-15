@@ -17,7 +17,8 @@ export default {
     defaultParams: {
       page: 0,
       size: 20
-    }
+    },
+    ownedGarageInfo: []
   },
   getters: {
     getGarages(state) {
@@ -37,6 +38,9 @@ export default {
     setParams(state, data) {
       state.params = data;
     },
+    setOwnedGarageInfo(state, data){
+      state.ownedGarageInfo = data
+    }
 
   },
   actions: {
@@ -59,7 +63,39 @@ export default {
           console.log(err);
         });
     },
-    setParam({ commit, state }, param){
+    async addOwnedGarage({commit}, payload) {
+      let token = localStorage.getItem("token")
+      console.log(payload)
+      await axios
+        .post(
+          BASE_URL + "/garages",
+          {
+            name: payload.name,
+            cityId: payload.cityId,
+            address: payload.address,
+            postCode: payload.postCode,
+            services: payload.selectedServices,
+            hoursWeek: payload.hoursWeek,
+            hoursSaturday: payload.hoursSaturday,
+            horusSunday: payload.hoursSunday,
+            mapURL: payload.mapURL,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` }
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            console.log('warsztat dodany')
+            commit("setOwnedGarageInfo", res.data)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    setParam({ commit, state }, param) {
 
       var tempParams = {
         ...state.params,
@@ -68,7 +104,7 @@ export default {
 
       commit("setParams", tempParams)
     },
-    resetParams({commit, state}) {
+    resetParams({ commit, state }) {
       commit("setParams", state.defaultParams)
     },
     chooseGarage({ commit }, data) {
