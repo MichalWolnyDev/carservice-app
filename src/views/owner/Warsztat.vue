@@ -2,6 +2,7 @@
   <div>
     <h2 class="title title__h2 text__center">Mój warsztat (dla właściciela)</h2>
     <div class="garage">
+      {{getOwnedGarages}}
       <div class="garage__title">Informacje o warsztacie</div>
       <table class="garage__table">
         <tr>
@@ -38,6 +39,16 @@
   </div>
  
 </template>
+<script>
+import search from "@/mixins/search"
+export default {
+  name: 'Warsztat',
+  mixins: [search],
+  mounted() {
+    this.fetchOwnedGarages
+  }
+}
+</script>
 <style lang="scss">
   .garage {
     &__title {

@@ -18,7 +18,9 @@ export default {
       page: 0,
       size: 20
     },
-    ownedGarageInfo: []
+    ownedGarageInfo: [],
+    ownedGarages: [],
+    isGarageAdded: false
   },
   getters: {
     getGarages(state) {
@@ -27,6 +29,12 @@ export default {
     getChosenGarage(state) {
       return state.chosenGarage;
     },
+    getGarageAdded(state){
+      return state.isGarageAdded;
+    },
+    getOwnedGarages(state){
+      return state.ownedGarages;
+    }
   },
   mutations: {
     setGarageList(state, data) {
@@ -40,6 +48,12 @@ export default {
     },
     setOwnedGarageInfo(state, data){
       state.ownedGarageInfo = data
+    },
+    setGarageAdded(state, data){
+      state.isGarageAdded = data
+    },
+    setOwnedGarages(state, data){
+      state.ownedGarages = data
     }
 
   },
@@ -88,8 +102,28 @@ export default {
           console.log(res);
           if (res.status == 200) {
             console.log('warsztat dodany')
+            commit("setGarageAdded", true)
             commit("setOwnedGarageInfo", res.data)
           }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async fetchOwnedGarages({ commit }) {
+      let token = localStorage.getItem("token")
+      await axios.get(BASE_URL + '/garages/owned', {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Headers": "*",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then((res) => {
+
+          commit("setOwnedGarages", res.data)
         })
         .catch((err) => {
           console.log(err);
@@ -112,6 +146,9 @@ export default {
     },
     clearGarage({ commit }) {
       commit("setChosenGarage", [])
-    }
+    },
+    garageAdded({ commit }, data) {
+      commit("setGarageAdded", data)
+    },
   },
 }

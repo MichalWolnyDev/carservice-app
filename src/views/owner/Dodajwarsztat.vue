@@ -1,9 +1,10 @@
 <template>
   <div>
     <h2 class="title title__h2 text__center">
-      Dodaj warsztat (dla właściciela)
+      Dodaj warsztat
     </h2>
     <div class="addGarage">
+      {{getGarageAdded}}
       <div class="addGarage__form">
         <div class="addGarage__form-wrap">
           <div class="addGarage__form-item">

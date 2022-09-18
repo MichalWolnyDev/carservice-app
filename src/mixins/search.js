@@ -15,7 +15,9 @@ export default {
             getUserInfo: 'getUserInfo',
             getCities: 'getCities',
             getUserCars: 'getUserCars',
-            getUserBookings: 'getUserBookings'
+            getUserBookings: 'getUserBookings',
+            getGarageAdded: 'getGarageAdded',
+            getOwnedGarages: 'getOwnedGarages'
         })
     },
     methods: {
@@ -30,7 +32,9 @@ export default {
             resetParams: 'resetParams',
             fetchUserCars: 'fetchUserCars',
             fetchUserBookings: 'fetchUserBookings',
-            addOwnedGarage: 'addOwnedGarage'
+            addOwnedGarage: 'addOwnedGarage',
+            garageAdded: 'garageAdded',
+            fetchOwnedGarages: 'fetchOwnedGarages'
          
         })
     },
