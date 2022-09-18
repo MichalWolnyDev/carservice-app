@@ -27,6 +27,7 @@
         @input="handleInput"
         @click="open = !open"
         :placeholder="selected.name"
+        :class="{ open: open, error: isError }"
         v-model="textToFilter"
         v-else
       />

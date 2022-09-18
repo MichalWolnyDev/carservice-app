@@ -45,7 +45,7 @@ export default {
   name: 'Warsztat',
   mixins: [search],
   mounted() {
-    this.fetchOwnedGarages
+    this.fetchOwnedGarages()
   }
 }
 </script>
