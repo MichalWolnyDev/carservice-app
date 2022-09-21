@@ -1,7 +1,7 @@
 <template>
  
   <div class="home">
-    <h2 class="title title__h2 text__center">Strona główna</h2>
+    <!-- <h2 class="title title__h2 text__center">Strona główna</h2>
      <div class="reservation__title">Aktualne rezerwacje</div>
     <table class="reservation__table">
         <tr>
@@ -24,7 +24,7 @@
         </tr>
       </table>
       <div class="reservation__title">Uwagi</div>
-      <div class="reservation__note">Dnia 05.10.2022 pojazd Volkswagen Passat utraci ważność przeglądu technicznego.</div>
+      <div class="reservation__note">Dnia 05.10.2022 pojazd Volkswagen Passat utraci ważność przeglądu technicznego.</div> -->
   </div>
 </template>
 
