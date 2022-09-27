@@ -17,6 +17,17 @@
             <p class="addMechanic__form-error" v-if="$v.formData.email.$error">
               To pole jest wymagane
             </p>
+            <CustomSelect
+            :options="getOwnedGarages"
+            :default="'wybierz'"
+            class="select"
+            @input="
+              fetchModels($event.name);
+              form.brand = $event.name;
+            "
+          >
+            <template> Warsztat </template>
+          </CustomSelect>
           </div>
           <div class="addMechanic__top">
             <Button
@@ -35,15 +46,22 @@
 <script>
 import Input from "@/components/Inputs/Input.vue";
 import Button from "@/components/Inputs/Button.vue";
-
+import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import { required, email } from "vuelidate/lib/validators";
+import search from "@/mixins/search"
 
 export default {
   components: {
     Input,
     Button,
+    CustomSelect,
   },
-
+  name: 'Warsztat',
+  mixins: [search],
+  mounted() {
+    this.fetchOwnedGarages()
+  },
+  
   data() {
     return {
       formData: {
