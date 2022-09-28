@@ -119,7 +119,7 @@ export default {
     },
     async fetchOwnedGarages({ commit }) {
       let token = localStorage.getItem("token")
-      await axios.get(BASE_URL + '/garages/owned/', {
+      await axios.get(BASE_URL + '/garages/owned', {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
