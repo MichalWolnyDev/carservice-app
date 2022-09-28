@@ -1,7 +1,7 @@
 <template>
-  <div class="listingMechanics shadow">
+  <div class="listingMechanics shadow" v-if="employee">
     <p class="listingMechanics__title">
-     Karol Wojtyła
+      {{ employee.firstName}} {{ employee.lastName}}
     </p>
 
     <div class="listingMechanics__wrap">
@@ -9,24 +9,19 @@
         <table class="listingMechanics__table">
           <tr>
             <th>Imię:</th>
-            <td>Karol</td>
+            <td>{{employee.firstName}}</td>
           </tr>
           <tr>
             <th>Nazwisko:</th>
-            <td>Wojtyła</td>
-          </tr>
-          <tr>
-            <th>Data urodzenia:</th>
-            <td>18.05.1920</td>
-          </tr>
-          <tr>
-            <th>Adres:</th>
-            <td>Ul. Kremówkowa 12</td>
-            <td>21-377 Wadowice</td>
+            <td>{{employee.lastName}}</td>
           </tr>
           <tr>
             <th>Numer telefonu:</th>
-            <td>213769420 </td>
+            <td>{{employee.phone}}</td>
+          </tr>
+          <tr>
+            <th>Adres e-mail:</th>
+            <td>{{employee.email}}</td>
           </tr>
         </table>
         <br />
@@ -46,6 +41,7 @@
 
   export default {
     name: "ListingMechanics",
+    props: ["employee"],
     components: {
       Button,
     }
