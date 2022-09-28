@@ -20,6 +20,7 @@ export default {
     },
     ownedGarageInfo: [],
     ownedGarages: [],
+    employees: [],
     isGarageAdded: false
   },
   getters: {
@@ -34,6 +35,9 @@ export default {
     },
     getOwnedGarages(state){
       return state.ownedGarages;
+    },
+    getEmployees(state){
+      return state.employees;
     }
   },
   mutations: {
@@ -54,6 +58,9 @@ export default {
     },
     setOwnedGarages(state, data){
       state.ownedGarages = data
+    },
+    setEmployees(state, data){
+      state.employees = data
     }
 
   },
@@ -112,7 +119,7 @@ export default {
     },
     async fetchOwnedGarages({ commit }) {
       let token = localStorage.getItem("token")
-      await axios.get(BASE_URL + '/garages/owned', {
+      await axios.get(BASE_URL + '/garages/owned/', {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -124,6 +131,26 @@ export default {
         .then((res) => {
 
           commit("setOwnedGarages", res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async fetchEmployees({ commit }) {
+      let token = localStorage.getItem("token")
+      await axios.get(BASE_URL + '/garages/owned/mechanics', {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Headers": "*",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then((res) => {
+
+          commit("setEmployees", res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err);

@@ -17,7 +17,8 @@ export default {
             getUserCars: 'getUserCars',
             getUserBookings: 'getUserBookings',
             getGarageAdded: 'getGarageAdded',
-            getOwnedGarages: 'getOwnedGarages'
+            getOwnedGarages: 'getOwnedGarages',
+            getEmployees: 'getEmployees'
         })
     },
     methods: {
@@ -34,7 +35,8 @@ export default {
             fetchUserBookings: 'fetchUserBookings',
             addOwnedGarage: 'addOwnedGarage',
             garageAdded: 'garageAdded',
-            fetchOwnedGarages: 'fetchOwnedGarages'
+            fetchOwnedGarages: 'fetchOwnedGarages',
+            fetchEmployees: 'fetchEmployees'
          
         })
     },
