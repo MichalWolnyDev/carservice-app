@@ -36,6 +36,16 @@
           </td>
         </tr>
       </table>
+      <div class="profile__jobs" v-if="getUserInfo.authorities[0] == 'MECHANIC'">
+        <div v-if="getUserInfo.garages.length > 0">
+          <div class="profile__title">Pracuje w:</div>
+          <ul class="profile__jobs-list">
+            <li v-for="job in getUserInfo.garages" :key="job.id">
+              {{ job.name }} - {{ job.address }}, {{ job.postCode }} {{ job.city.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -47,7 +57,7 @@ export default {
 </script>
 <style lang="scss">
 .profile {
-  &__username{
+  &__username {
     text-transform: capitalize;
   }
   &__title {
