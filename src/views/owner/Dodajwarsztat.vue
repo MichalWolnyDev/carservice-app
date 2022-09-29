@@ -60,19 +60,38 @@
                 To pole jest wymagane
               </p>
             </div>
-            <div class="addGarage__form-item">
-              <Input
+            <div class="addGarage__form-item padding">
+              <p class="addGarage__hours-label">Godziny pracy w tygodniu</p>
+              <div class="addGarage__hours-row">
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursWeekFrom"></vue-timepicker>
+                </div>
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursWeekTo"></vue-timepicker>
+                </div>
+              </div>
+              <!-- <p class="addGarage__form-error" v-if="$v.form.hoursWeek.$error">
+                To pole jest wymagane
+              </p> -->
+              <!-- <Input
                 v-model.trim="$v.form.hoursWeek.$model"
                 :error="$v.form.hoursWeek.$error"
               >
                 <template> Godziny pracy w tygodniu </template>
               </Input>
-              <p class="addGarage__form-error" v-if="$v.form.hoursWeek.$error">
-                To pole jest wymagane
-              </p>
+               -->
             </div>
-            <div class="addGarage__form-item">
-              <Input
+            <div class="addGarage__form-item padding">
+              <p class="addGarage__hours-label">Godziny pracy w sobotę</p>
+               <div class="addGarage__hours-row">
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursSaturdayFrom"></vue-timepicker>
+                </div>
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursSaturdayTo"></vue-timepicker>
+                </div>
+              </div>
+              <!-- <Input
                 v-model.trim="$v.form.hoursSaturday.$model"
                 :error="$v.form.hoursSaturday.$error"
               >
@@ -83,10 +102,19 @@
                 v-if="$v.form.hoursSaturday.$error"
               >
                 To pole jest wymagane
-              </p>
+              </p> -->
             </div>
-            <div class="addGarage__form-item">
-              <Input
+            <div class="addGarage__form-item padding">
+              <p class="addGarage__hours-label">Godziny pracy w niedziele</p>
+              <div class="addGarage__hours-row">
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursSundayFrom"></vue-timepicker>
+                </div>
+                <div class="addGarage__hours-item">
+                  <vue-timepicker v-model="hoursSundayTo"></vue-timepicker>
+                </div>
+              </div>
+              <!-- <Input
                 v-model.trim="$v.form.hoursSunday.$model"
                 :error="$v.form.hoursSunday.$error"
               >
@@ -97,7 +125,7 @@
                 v-if="$v.form.hoursSunday.$error"
               >
                 To pole jest wymagane
-              </p>
+              </p> -->
             </div>
             <div class="addGarage__form-item">
               <Input v-model="form.mapURL">
@@ -154,6 +182,8 @@ import { required } from "vuelidate/lib/validators";
 
 import Loader from "@/components/Inputs/Loader.vue";
 
+import VueTimepicker from "vue2-timepicker";
+import "vue2-timepicker/dist/VueTimepicker.css";
 
 export default {
   mixins: [search, dictionary, helper],
@@ -163,6 +193,7 @@ export default {
     Button,
     Checkbox,
     Loader,
+    VueTimepicker,
   },
 
   data() {
@@ -189,6 +220,12 @@ export default {
         cityId: null,
         selectedServices: [],
       },
+      hoursWeekFrom: "",
+      hoursWeekTo: "",
+      hoursSaturdayFrom: "",
+      hoursSaturdayTo: "",
+      hoursSundayFrom: "",
+      hoursSundayTo: "",
       filteredCities: [],
       showLoader: false,
       cityError: false,
@@ -199,9 +236,9 @@ export default {
       name: { required },
       address: { required },
       postCode: { required },
-      hoursWeek: { required },
-      hoursSaturday: { required },
-      hoursSunday: { required },
+      // hoursWeek: { required },
+      // hoursSaturday: { required },
+      // hoursSunday: { required },
       cityId: { required },
     },
   },
@@ -216,6 +253,10 @@ export default {
         this.cityError = false;
       }
 
+      this.form.hoursWeek = this.connectHours(this.hoursWeekFrom, this.hoursWeekTo)
+      this.form.hoursSaturday = this.connectHours(this.hoursSaturdayFrom, this.hoursSaturdayTo)
+      this.form.hoursSunday = this.connectHours(this.hoursSundayFrom, this.hoursSundayTo)
+
       if (this.$v.form.$pending || this.$v.form.$error || this.cityError) {
         console.log("error");
         this.showLoader = false;
@@ -224,11 +265,14 @@ export default {
         this.addOwnedGarage(this.form);
       }
     },
-    addNextGarage(){
-      this.form = this.resetForm
-      this.showLoader = false
-      this.garageAdded(false)
-    }
+    connectHours(a, b) {
+      return a + " - " + b;
+    },
+    addNextGarage() {
+      this.form = this.resetForm;
+      this.showLoader = false;
+      this.garageAdded(false);
+    },
   },
   watch: {
     "form.cityId": {
@@ -275,11 +319,34 @@ export default {
       @media (max-width: 600px) {
         width: calc(100% / 1 - 1rem);
       }
+
+      &.padding{ 
+        padding: 10px 0;
+      }
     }
     &-error {
       color: $redError;
       font-size: 0.6rem;
       margin: 0;
+    }
+  }
+  &__hours {
+    &-row {
+      display: flex;
+    }
+    &-item {
+      width: 50%;
+
+      .vue__time-picker,
+      .vue__time-picker input.display-time {
+        width: 100%;
+        height: 40.4px;
+        border-radius: 5px;
+      }
+    }
+    &-label{
+      margin-bottom: 10px;
+      font-size: 14px;
     }
   }
 }

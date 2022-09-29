@@ -3,7 +3,6 @@
     <p class="listingMechanics__title">
       {{ employee.firstName}} {{ employee.lastName}}
     </p>
-
     <div class="listingMechanics__wrap">
       <div class="listingMechanics__col">
         <table class="listingMechanics__table">
@@ -24,13 +23,19 @@
             <td>{{employee.email}}</td>
           </tr>
         </table>
+        <br>
+        <p>
+          Pracuje w:
+        </p>
+        <ul>
+          <li v-for="job in employee.garages" :key="job.id">
+            {{ job.name }} - {{ job.address }}, {{ job.postCode }} {{ job.city.name }}
+          </li>
+        </ul>
         <br />
         <Button>         
-          Usuń mechanika</Button
+          Zwolnij mechanika</Button
         >
-
-            
-          
        
       </div>
     </div>
