@@ -40,6 +40,12 @@
         >
           Zwolnij mechanika</Button
         >
+        <br>
+        <transition name="fade">
+          <p class="listingMechanics__layoff-successmsg" v-if="success">
+            Mechanik został zwolniony
+          </p>
+        </transition>
         <div class="listingMechanics__layoff" v-if="layoff">
           <CustomSelect
             :options="employee.garages"
@@ -49,8 +55,6 @@
           >
             <template> Wybierz warsztat </template>
           </CustomSelect>
-          {{ layoffData.garageId }}
-          {{ layoffData.mechanicEmail }}
           <div
             class="listingMechanics__layoff-confirm"
             v-if="layoffData.garageId != null"
@@ -59,6 +63,7 @@
               Zwolnij!</Button
             >
           </div>
+          
         </div>
       </div>
     </div>
@@ -80,6 +85,7 @@ export default {
   data() {
     return {
       layoff: false,
+      success: false,
       layoffData: {
         garageId: null,
         mechanicEmail: "",
@@ -108,7 +114,13 @@ export default {
             if (res.status == 200) {
               this.success = true;
               this.fetchEmployees();
+              this.layoff = false;
             }
+
+            var _this = this;
+            setTimeout(function(){
+              _this.success = false;
+            }, 2000)
           })
           .catch((err) => {
             console.log(err);
@@ -150,6 +162,12 @@ export default {
     }
   }
 
+  &__layoff{
+    &-successmsg {
+      color: $green;
+    }
+  }
+
   &__col {
     flex: 1;
   }
@@ -165,5 +183,12 @@ export default {
   &__col {
     padding-right: 15px;
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
