@@ -31,12 +31,27 @@ export default {
     ListingMechanics,
     CustomSelect,
   },
+  data() {
+    return {
+      formData: {
+        garageId: null
+      }
+    }
+  },
   name: "Warsztat",
   mixins: [search],
   mounted() {
     this.fetchEmployees();
     this.fetchOwnedGarages();
   },
+  watch: {
+    'formData.garageId': {
+      handler(){
+        this.fetchEmployees(this.formData.garageId)
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss">

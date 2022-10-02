@@ -136,9 +136,13 @@ export default {
           console.log(err);
         });
     },
-    async fetchEmployees({ commit }) {
+    async fetchEmployees({ commit }, payload) {
+      console.log(payload)
       let token = localStorage.getItem("token")
       await axios.get(BASE_URL + '/garages/owned/mechanics', {
+        params: {
+          garageId: payload
+        },
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
