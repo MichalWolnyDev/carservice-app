@@ -11,14 +11,14 @@ export default {
             getGarages: 'getGarages',
             getChosenGarage: 'getChosenGarage',
             getToken: 'getToken',
-            // getUserToken: 'getUserToken',
             getUserInfo: 'getUserInfo',
             getCities: 'getCities',
             getUserCars: 'getUserCars',
             getUserBookings: 'getUserBookings',
             getGarageAdded: 'getGarageAdded',
             getOwnedGarages: 'getOwnedGarages',
-            getEmployees: 'getEmployees'
+            getEmployees: 'getEmployees',
+            getServiceBookings: 'getServiceBookings'
         })
     },
     methods: {
@@ -36,7 +36,8 @@ export default {
             addOwnedGarage: 'addOwnedGarage',
             garageAdded: 'garageAdded',
             fetchOwnedGarages: 'fetchOwnedGarages',
-            fetchEmployees: 'fetchEmployees'
+            fetchEmployees: 'fetchEmployees',
+            fetchServiceBookings: 'fetchServiceBookings'
          
         })
     },
