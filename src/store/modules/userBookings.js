@@ -9,7 +9,8 @@ const BASE_URL = process.env.VUE_APP_BASEURL
 export default {
     state: {
         bookings: [],
-        serviceBookings: []
+        serviceBookings: [],
+        bookingTemp: ""
 
     },
     getters: {
@@ -27,6 +28,9 @@ export default {
         },
         setServiceBookings(state, data) {
             state.serviceBookings = data;
+        },
+        setBookingStatusTemp(state, data) {
+            state.bookingTemp = data;
         },
 
 
@@ -54,7 +58,7 @@ export default {
         async fetchServiceBookings({ commit }, payload) {
             let token = localStorage.getItem("token")
             await axios.get(BASE_URL + '/bookings/' + payload, {
-               
+
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
@@ -62,7 +66,7 @@ export default {
                     "Access-Control-Allow-Headers": "*",
                     "Authorization": `Bearer ${token}`
                 },
-               
+
             })
                 .then((res) => {
                     console.log(res)
@@ -71,6 +75,29 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
-        }
+        },
+        async changeBookingStatus({commit}, payload) {
+            let token = localStorage.getItem("token")
+            console.log(payload)
+            await axios
+                .post(
+                    BASE_URL + "/bookings/" + payload.id, {
+                    data: {
+                        status: payload.name
+                    },
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+                )
+                .then((res) => {
+                    console.log(res);
+                    if (res.status == 200) {
+                        console.log('status zaktualizowany')
+                        commit("setBookingStatusTemp", res.data)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
     },
 }

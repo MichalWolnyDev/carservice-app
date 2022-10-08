@@ -37,7 +37,8 @@ export default {
             garageAdded: 'garageAdded',
             fetchOwnedGarages: 'fetchOwnedGarages',
             fetchEmployees: 'fetchEmployees',
-            fetchServiceBookings: 'fetchServiceBookings'
+            fetchServiceBookings: 'fetchServiceBookings',
+            changeBookingStatus: 'changeBookingStatus'
          
         })
     },

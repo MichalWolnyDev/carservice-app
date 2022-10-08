@@ -15,19 +15,24 @@
         </CustomSelect>
       </div>
     </div>
-    <div v-if="getServiceBookings">
-      {{getServiceBookings}}
+    <div v-if="getServiceBookings.length > 0">
+      <ListingBookingService v-for="(booking, id) in getServiceBookings" :key="id" :booking="booking"/>
+    </div>
+    <div v-else>
+      Brak zleceń w wybranym warsztacie
     </div>
   </div>
 </template>
 <script>
 import search from "@/mixins/search";
 import CustomSelect from "@/components/Inputs/CustomSelect.vue";
+import ListingBookingService from "@/components/Listing/ListingBookingService.vue";
 export default {
     name: 'Zlecenia',
     mixins: [search],
     components: {
-      CustomSelect
+      CustomSelect,
+      ListingBookingService
     },
     data(){
       return {
