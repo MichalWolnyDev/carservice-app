@@ -21,9 +21,9 @@
             Sobota: {{ booking.garage.hoursSaturday }} <br />
             Niedziela: {{ booking.garage.horusSunday }}
           </p>
-          <br>
+          <br />
           <p class="listingItemFixedCars__text">
-            Data wizyty: {{ booking.date }}
+            Data wizyty: {{ dateFormat(booking.date) }}
           </p>
           <br />
           <Button :arrow="true" :green="true" @click.native="show = !show">
@@ -39,60 +39,141 @@
             </p>
         </div> -->
               <div class="steps">
-                <div class="steps__item active">
+                <div
+                  class="steps__item"
+                  :class="{
+                    active: bookingStatus.status == 'WAITING_FOR_ACCEPT',
+                  }"
+                >
                   <div class="steps__item-row">
-                    <div class="steps__number active">
+                    <div
+                      class="steps__number"
+                      :class="{
+                        active: bookingStatus.status == 'WAITING_FOR_ACCEPT',
+                      }"
+                    >
                       <p class="steps__number-text">1</p>
                     </div>
                     <div class="steps__message">
-                      <p class="steps__message-text active">
+                      <p
+                        class="steps__message-text"
+                        :class="{
+                          active: bookingStatus.status == 'WAITING_FOR_ACCEPT',
+                        }"
+                      >
                         Rezerwacja oczekuje na przyjęcie przez warsztat
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="steps__item">
+                <div
+                  class="steps__item"
+                  :class="{ active: bookingStatus.status == 'ACCEPTED' }"
+                >
                   <div class="steps__item-row">
-                    <div class="steps__number">
+                    <div
+                      class="steps__number"
+                      :class="{ active: bookingStatus.status == 'ACCEPTED' }"
+                    >
                       <p class="steps__number-text">2</p>
                     </div>
                     <div class="steps__message">
-                      <p class="steps__message-text">
+                      <p
+                        class="steps__message-text"
+                        :class="{ active: bookingStatus.status == 'ACCEPTED' }"
+                      >
                         Samochód przyjęty do warsztatu
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="steps__item">
+                <div
+                  class="steps__item"
+                  :class="{ active: bookingStatus.status == 'REPAIRING' }"
+                >
                   <div class="steps__item-row">
-                    <div class="steps__number">
+                    <div
+                      class="steps__number"
+                      :class="{ active: bookingStatus.status == 'REPAIRING' }"
+                    >
                       <p class="steps__number-text">3</p>
                     </div>
                     <div class="steps__message">
-                      <p class="steps__message-text">
+                      <p
+                        class="steps__message-text"
+                        :class="{ active: bookingStatus.status == 'REPAIRING' }"
+                      >
                         Trwa naprawa Twojego samochodu
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="steps__item">
+                <div
+                  class="steps__item"
+                  :class="{
+                    active: bookingStatus.status == 'WAITING_FOR_PICKUP',
+                  }"
+                >
                   <div class="steps__item-row">
-                    <div class="steps__number">
+                    <div
+                      class="steps__number"
+                      :class="{
+                        active: bookingStatus.status == 'WAITING_FOR_PICKUP',
+                      }"
+                    >
                       <p class="steps__number-text">4</p>
                     </div>
                     <div class="steps__message">
-                      <p class="steps__message-text">Auto czeka na odbiór</p>
+                      <p
+                        class="steps__message-text"
+                        :class="{
+                          active: bookingStatus.status == 'WAITING_FOR_PICKUP',
+                        }"
+                      >
+                        Auto czeka na odbiór
+                      </p>
                     </div>
                   </div>
                 </div>
-                <div class="steps__item">
+                <div
+                  class="steps__item"
+                  :class="{ active: bookingStatus.status == 'COMPLETED' }"
+                >
                   <div class="steps__item-row">
-                    <div class="steps__number">
+                    <div
+                      class="steps__number"
+                      :class="{ active: bookingStatus.status == 'COMPLETED' }"
+                    >
                       <p class="steps__number-text">5</p>
                     </div>
                     <div class="steps__message">
-                      <p class="steps__message-text">
+                      <p
+                        class="steps__message-text"
+                        :class="{ active: bookingStatus.status == 'COMPLETED' }"
+                      >
                         Auto odebrane przez klienta
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="steps__item"
+                  v-if="bookingStatus.status == 'CANCELED'"
+                  :class="{ canceled: bookingStatus.status == 'CANCELED' }"
+                >
+                  <div class="steps__item-row">
+                    <div
+                      class="steps__number"
+                      :class="{ canceled: bookingStatus.status == 'CANCELED' }"
+                    >
+                      <p class="steps__number-text">X</p>
+                    </div>
+                    <div class="steps__message">
+                      <p
+                        class="steps__message-text"
+                        :class="{ canceled: bookingStatus.status == 'CANCELED' }"
+                      >
+                        Twoje zlecenie zostało odrzucone
                       </p>
                     </div>
                   </div>
@@ -108,8 +189,10 @@
 <script>
 import arrow_down from "/src/assets/arrow_down.svg";
 import Button from "@/components/Inputs/Button.vue";
+import helper from "@/mixins/helper";
 export default {
   props: ["booking"],
+  mixins: [helper],
   components: {
     Button,
   },
@@ -191,6 +274,11 @@ export default {
         background-color: $green;
       }
     }
+    &.canceled {
+      &::after {
+        background-color: $redError;
+      }
+    }
 
     &:last-of-type {
       &::after {
@@ -220,6 +308,12 @@ export default {
       transform: scale(1.2);
       animation: pulse 2s infinite;
     }
+    &.canceled {
+      background-color: $redError;
+      box-shadow: 0 0 0 0 rgb(255, 0, 0);
+      transform: scale(1.2);
+      animation: pulseRed 2s infinite;
+    }
 
     &-text {
       font-size: 24px;
@@ -235,6 +329,9 @@ export default {
       &.active {
         color: $green;
       }
+      &.canceled {
+        color: $redError;
+      }
     }
   }
 }
@@ -243,6 +340,22 @@ export default {
   0% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(49, 209, 44, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(49, 209, 44, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(49, 209, 44, 0);
+  }
+}
+@keyframes pulseRed {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, .7);
   }
 
   70% {

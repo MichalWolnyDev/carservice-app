@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="title title__h2 text__center">
-      Dodaj mechaników (dla właściciela)
+      Dodaj mechaników
     </h2>
     <div class="addMechanic">
       <div class="addMechanic__form">

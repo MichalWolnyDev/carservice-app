@@ -76,17 +76,19 @@ export default {
                     console.log(err);
                 });
         },
-        async changeBookingStatus({commit}, payload) {
+        async changeBookingStatus({ commit }, payload) {
             let token = localStorage.getItem("token")
             console.log(payload)
             await axios
                 .post(
                     BASE_URL + "/bookings/" + payload.id, {
-                    data: {
                         status: payload.name
-                    },
-                    headers: { Authorization: `Bearer ${token}` }
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+
                 }
+
                 )
                 .then((res) => {
                     console.log(res);

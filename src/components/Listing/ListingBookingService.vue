@@ -2,8 +2,6 @@
   <div>
     <div class="listingItem shadow">
       <p class="listingItem__title">Zlecenie nr.: {{ booking.id }}</p>
-      {{ booking }}
-
       <div class="listingItem__wrap">
         <div class="listingItem__col">
           <table class="listingItem__table">
@@ -105,10 +103,14 @@
         <br />
         <h3>Status zlecenia:</h3>
         <p>
-          {{ bookingStatus }}
+          <strong>
+            {{ bookingStatus.label }}
+          </strong>
+          ->
+          {{ dateFormat(bookingStatus.date) }}
         </p>
       </div>
-      <div class="">
+      <div class="" v-if="bookingStatus.status != 'COMPLETED'">
         <br />
         <h3>Zmiana statusu:</h3>
         <div class="listingItem__statusselect">
@@ -120,12 +122,12 @@
           >
           </CustomSelect>
         </div>
-        <p class="listingItem__error" v-if="selectedError">
-            Wybierz status!
-        </p>
+        <p class="listingItem__error" v-if="selectedError">Wybierz status!</p>
         <br />
-        
-        <Button :green="true" @click.native.prevent="changeStatus(booking.id)"> Zapisz </Button>
+
+        <Button :green="true" @click.native.prevent="changeStatus(booking.id)">
+          Zapisz
+        </Button>
       </div>
     </div>
   </div>
@@ -133,11 +135,14 @@
 <script>
 import CustomSelect from "@/components/Inputs/CustomSelect.vue";
 import Button from "@/components/Inputs/Button.vue";
+import search from "@/mixins/search";
+import helper from "@/mixins/helper";
 import { mapActions } from "vuex";
 
 export default {
   name: "BookingService",
   props: ["booking"],
+  mixins: [search, helper],
   data() {
     return {
       selectedStatus: "",
@@ -174,41 +179,26 @@ export default {
     Button,
     CustomSelect,
   },
-  computed: {
-    bookingStatus() {
-      if (this.booking.status[0].status == "WAITING_FOR_ACCEPT")
-        return "Oczekuje na rozpatrzenie";
-      else if (this.booking.status[0].status == "ACCEPTED")
-        return "Zaakceptowano zlecenie";
-      else if (this.booking.status[0].status == "REPAIRING")
-        return "Zlecenie w trakcie realizacji";
-      else if (this.booking.status[0].status == "WAITING_FOR_PICKUP")
-        return "Oczekuje na odbiór";
-      else if (this.booking.status[0].status == "COMPLETED")
-        return "Zakończono";
-      else if (this.booking.status[0].status == "CANCELED") return "Odrzucone";
-      else return "";
-    },
-  },
+  
 
   methods: {
-    changeStatus(id){
-        if(this.selectedStatus != ""){
-            this.selectedError = false
+    changeStatus(id) {
+      if (this.selectedStatus != "") {
+        this.selectedError = false;
 
-            this.changeBookingStatus(
-                {
-                    id: id,
-                    name: this.selectedStatus
-                }
-            )
-        } else{
-            this.selectedError = true
-        }
+        this.changeBookingStatus({
+          id: id,
+          name: this.selectedStatus,
+        });
+
+        this.fetchServiceBookings(this.booking.garage.id);
+      } else {
+        this.selectedError = true;
+      }
     },
     ...mapActions({
-        changeBookingStatus: 'changeBookingStatus'
-    })
+      changeBookingStatus: "changeBookingStatus",
+    }),
   },
 };
 </script>
@@ -253,7 +243,7 @@ export default {
     max-width: 100%;
   }
 
-  &__error{
+  &__error {
     color: $redError;
     font-weight: 600;
   }
