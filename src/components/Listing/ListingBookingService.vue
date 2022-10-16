@@ -95,7 +95,7 @@
       <div class="" v-if="booking.message != ''">
         <br />
         <h3>Wiadomość od klienta:</h3>
-        <p>
+        <p class="listingItem__clientmsg">
           {{ booking.message }}
         </p>
       </div>
@@ -246,6 +246,10 @@ export default {
   &__error {
     color: $redError;
     font-weight: 600;
+  }
+
+  &__clientmsg{
+    word-break: break-all;
   }
 }
 </style>
