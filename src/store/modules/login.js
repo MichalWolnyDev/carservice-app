@@ -9,17 +9,24 @@ const BASE_URL = process.env.VUE_APP_BASEURL
 
 export default {
   state: {
-    token: ''
+    token: '',
+    loginError: {}
   },
   getters: {
     getLoginToken(state) {
       return state.token;
+    },
+    getLoginError(state) {
+      return state.loginError;
     },
 
   },
   mutations: {
     setLoginToken(state, data) {
       state.token = data;
+    },
+    setLoginError(state, data) {
+      state.loginError = data;
     },
 
 
@@ -50,6 +57,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          commit("setLoginError", err.response)
         });
     },
 

@@ -31,6 +31,9 @@
             Hasło musi mieć min. 8 znaków
           </p>
         </div>
+        <p class="loginform__input-error" v-if="getLoginError.data">
+          {{ getLoginError.data }}
+        </p>
         <div class="loginform__button">
           <Button
             :blue="true"
@@ -42,6 +45,7 @@
           </Button>
           <Loader v-else />
         </div>
+
         <p class="loginform__annotation">
           Nie masz konta?
           <span @click="$emit('changeSignForm', 'register')"
@@ -95,12 +99,24 @@ export default {
       } else {
         this.showLoader = true;
         this.userLogin(this.formData);
+
+        
         setTimeout(function () {
           router.push("/");
         }, 1000);
       }
     },
   },
+  watch: {
+    'getLoginError': {
+      handler() {
+        if(this.getLoginError.data){
+          this.showLoader = false
+        }
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss">

@@ -18,7 +18,8 @@ export default {
             getGarageAdded: 'getGarageAdded',
             getOwnedGarages: 'getOwnedGarages',
             getEmployees: 'getEmployees',
-            getServiceBookings: 'getServiceBookings'
+            getServiceBookings: 'getServiceBookings',
+            getLoginError: 'getLoginError'
         })
     },
     methods: {
