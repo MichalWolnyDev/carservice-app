@@ -11,7 +11,7 @@
                 <strong> Data wizyty: </strong>
               </td>
               <td>
-                {{ booking.date }}
+                {{ dateFormat(booking.date, true) }}
               </td>
             </tr>
             <tr>
