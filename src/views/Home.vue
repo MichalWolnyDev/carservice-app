@@ -1,5 +1,4 @@
 <template>
- 
   <div class="home">
     <!-- <h2 class="title title__h2 text__center">Strona główna</h2>
      <div class="reservation__title">Aktualne rezerwacje</div>
@@ -34,9 +33,10 @@
 export default {
   name: "Home",
 
+
+ 
   // components: {
   // }
-
 };
 </script>
 
@@ -46,13 +46,13 @@ export default {
     margin: 30px 0;
     font-size: 20px;
   }
-  &__note{ 
+  &__note {
     font-size: 15px;
-    color:red;
+    color: red;
   }
   &__table {
     text-align: left;
-    border-spacing:5px
+    border-spacing: 5px;
   }
   th {
     font-weight: bold;

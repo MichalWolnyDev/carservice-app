@@ -94,9 +94,26 @@ const router = new VueRouter({
   base: process.env.BASEURL,
   routes
 })
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    Buffer.from(base64, "base64")
+      .toString("ascii")
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
+
 
 
 router.beforeEach((to, from, next) => {
+
   if (to.matched.some((record) => record.meta.guest)) {
     if (localStorage.getItem('token') != null) {
       next("/");
@@ -104,35 +121,54 @@ router.beforeEach((to, from, next) => {
     }
     next();
   } else if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (localStorage.getItem('token') != null && to.path !== "/") {
-      console.log(to)
-      if (localStorage.getItem('userRole') == "OWNER" && to.meta.owner) {
-        next();
-      }
-      else if (localStorage.getItem('userRole') == "USER" && to.meta.user) {
-        next();
-      }
-      else if (localStorage.getItem('userRole') == "MECHANIC" && to.meta.mechanic) {
-        next();
-      }
-      else {
 
-
-        next("/")
+    if (localStorage.getItem("token")) {
+      console.log(localStorage.getItem("token"))
+      const jwtPayload = parseJwt(localStorage.getItem("token"));
+      console.log(jwtPayload)
+      if (jwtPayload.exp < Date.now() / 1000) {
+        // token expired
+        console.log("token wygasl");
+        localStorage.removeItem("token");
+        next("/login");
         return;
       }
+    
+      if (localStorage.getItem('token') != null && to.path !== "/") {
+        console.log(to)
+        if (localStorage.getItem('userRole') == "OWNER" && to.meta.owner) {
+          next();
+        }
+        else if (localStorage.getItem('userRole') == "USER" && to.meta.user) {
+          next();
+        }
+        else if (localStorage.getItem('userRole') == "MECHANIC" && to.meta.mechanic) {
+          next();
+        }
+        else {
+  
+  
+          next("/")
+          return;
+        }
+  
+  
+      }
+      next()
 
 
-    }
-    next()
-
-    if (localStorage.getItem('token') == null) {
+    } else {
       next("/login");
-
     }
+
+    // if (localStorage.getItem('token') == null) {
+    //   console.log('lamsdpoasmd')
+    //   next("/login");
+
+    // }
 
   } else {
-    next();
+    next("/login");
 
   }
 });
