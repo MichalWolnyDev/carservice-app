@@ -28,6 +28,13 @@ export default {
     this.fetchUserInfo();
   },
 };
+
+// check if logout-event in localStorage is fired and reload page in every tab
+window.addEventListener("storage", function (event) {
+  if (event.key == "logout-event") {
+    window.location.reload(true);
+  }
+});
 </script>
 
 <style lang="scss">

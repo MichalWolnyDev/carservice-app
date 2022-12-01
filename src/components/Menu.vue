@@ -30,7 +30,7 @@
           </router-link>
         </div>
         <div v-if="getUserInfo.authorities[0] == 'OWNER'">
-           <router-link to="/">
+          <router-link to="/">
             <div class="menu__item">Strona główna</div>
           </router-link>
           <router-link to="/profil">
@@ -48,12 +48,12 @@
           <router-link to="/dodajmechanika">
             <div class="menu__item">Dodaj mechaników</div>
           </router-link>
-           <router-link to="/zlecenia">
+          <router-link to="/zlecenia">
             <div class="menu__item">Zlecenia</div>
           </router-link>
         </div>
         <div v-if="getUserInfo.authorities[0] == 'MECHANIC'">
-           <router-link to="/">
+          <router-link to="/">
             <div class="menu__item">Strona główna</div>
           </router-link>
           <router-link to="/profil">
@@ -62,7 +62,6 @@
           <router-link to="/zlecenia">
             <div class="menu__item">Zlecenia</div>
           </router-link>
-         
         </div>
 
         <div class="menu__item menu__item-bottom" @click="logout">Wyloguj</div>
@@ -98,6 +97,10 @@ export default {
       localStorage.removeItem("token");
       this.resetUserInfo();
       window.location.reload(true);
+
+      localStorage.setItem("logout-event", "logout" + Math.random());
+
+      
 
       this.$router.push("/login");
     },
