@@ -127,11 +127,11 @@
                 To pole jest wymagane
               </p> -->
             </div>
-            <div class="addGarage__form-item">
+            <!-- <div class="addGarage__form-item">
               <Input v-model="form.mapURL">
                 <template> Link do mapy Google </template>
               </Input>
-            </div>
+            </div> -->
             <div class="addGarage__form-item">&nbsp;</div>
           </div>
           <div class="addGarage__form-services">
