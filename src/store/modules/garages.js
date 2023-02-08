@@ -12,11 +12,11 @@ export default {
     chosenGarage: [],
     params: {
       page: 0,
-      size: 20
+      size: 200
     },
     defaultParams: {
       page: 0,
-      size: 20
+      size: 200
     },
     ownedGarageInfo: [],
     ownedGarages: [],
